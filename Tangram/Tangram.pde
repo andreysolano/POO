@@ -36,7 +36,7 @@ float angp=0;
 float angc=0;
 
 color negro = color(54,54,54);
-color nivel= color(245,206,197,50);
+color nivel= color(245,206,197);
 
 PShape pez;
 
@@ -46,7 +46,24 @@ void setup() {
 void draw() {
   background(negro);
   strokeWeight(2);
+  
+   
+  push();
+  pez();
+  shape(pez);
+  pop();
+  
+  fichas();
+ 
+}
 
+
+
+
+
+
+void fichas(){
+  
 
 
   //------BLOQUE TRIANGULO VERDE (1)----------//
@@ -175,14 +192,7 @@ void draw() {
      angc +=45;
      delay(100);
   }
-
-  pez();
-  shape(pez);
-
-
 }
-
-
 
 
 
@@ -279,6 +289,7 @@ void cuadrado(float cx,float cy, float angulo){
 }
 
 void pez(){
+ 
   translate(650,200);
   pez =createShape();
   pez.beginShape();

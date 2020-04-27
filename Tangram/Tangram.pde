@@ -35,6 +35,10 @@ float ang5=0;
 float angp=0;
 float angc=0;
 
+//escalas reflexión del paralelogramo
+float escx=1;
+float escy=1;
+
 color negro = color(54,54,54);
 color nivel= color(245,206,197);
 
@@ -54,7 +58,25 @@ void draw() {
   pop();
   
   fichas();
- 
+  
+  /* int cuenta= 0;
+  loadPixels();
+  for (int i = 0; i < (width*height/2)-width/2; i++) {
+    if(pixels[i] == negro); cuenta=cuenta +1;
+  }
+  
+  for ( int i = 0; i < height; i++) {
+   for (int j =0; j < width; j ++ ) { 
+      if(get(i,j)==nivel);cuenta=cuenta+1;
+     }
+ }
+  
+  print(cuenta);
+  print("       ");
+  */
+  
+  
+  
 }
 
 
@@ -161,7 +183,7 @@ void fichas(){
     fill(255,150,0);
   }
   else fill(113, 125, 126);
-  paralelogramo(cxp,cyp,angp);
+  paralelogramo(cxp,cyp,angp,escx,escy);
 
  //comprubea que el mouse esta encima y hay click izq
  if(seleccion(cxp,cyp)){
@@ -173,6 +195,10 @@ void fichas(){
      angp +=45;
      delay(100);
   }
+ if (reflejar (cxp, cyp)) {
+      escx *= -1;
+      delay (100);
+ }
 
 
  //------BLOQUE CUADRADO CAFE (7)----------//
@@ -192,6 +218,8 @@ void fichas(){
      angc +=45;
      delay(100);
   }
+
+  
 }
 
 
@@ -263,10 +291,11 @@ void triangulo5(float cx,float cy, float angulo){
 }
 
 //PARALELOGRAMO CAFE
-void paralelogramo(float cx,float cy, float angulo){
+void paralelogramo(float cx,float cy, float angulo, float escalax, float escalay){
   push();
   noStroke();
   translate(cx,cy);
+  scale (escalax, escalay);
   rotate(radians(angulo));
   cx=0;cy=0;
   quad(cx-l8,cy-l8,cx+(3*l8),cy-l8,cx+l8,cy+l8,cx-(3*l8),cy+l8);
@@ -322,6 +351,13 @@ boolean tespacio(float cx,float cy){
        if (key == ' ') return true;
    }
    return false;
+}
+
+boolean reflejar (float cx, float cy){
+  if (keyPressed && encima (mouseX,mouseY, cx, cy, radius)){
+    if (key == 'r' ) return true;
+  }
+  return false;
 }
 
 //obtiene la distancia entre el mouse y el centro del circulo usando pitagoras

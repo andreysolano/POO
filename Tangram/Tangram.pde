@@ -1,4 +1,4 @@
-float l= 300;  //equivalencias entre las figuras
+float l= 340;  //equivalencias entre las figuras
 float l2=l/2;
 float l4=l/4;
 float l8= l/8;
@@ -44,6 +44,7 @@ color nivel= color(245,206,197);
 
 PShape pez;
 boolean drawGrid = true;
+
 
 void setup() {
   size(1200,600);

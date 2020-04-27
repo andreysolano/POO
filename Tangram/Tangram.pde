@@ -43,6 +43,7 @@ color negro = color(54,54,54);
 color nivel= color(245,206,197);
 
 PShape pez;
+boolean drawGrid = true;
 
 void setup() {
   size(1200,600);
@@ -58,6 +59,12 @@ void draw() {
   pop();
   
   fichas();
+  
+  if (drawGrid){
+    drawGrid(10);
+  }
+  
+  
   
   /* int cuenta= 0;
   loadPixels();
@@ -371,4 +378,23 @@ boolean encima(float px, float py, float cx, float cy, float r) {
     return true;
   }
   return false;
+}
+void drawGrid(float scale) {
+  push();
+  strokeWeight(1);
+  int i;
+  for (i=0; i<=width/scale; i++) {
+    stroke(0, 0, 0, 20);
+    line(i*scale, 0, i*scale, height);
+  }
+  for (i=0; i<=height/scale; i++) {
+    stroke(0, 0, 0, 20);
+    line(0, i*scale, width, i*scale);
+  }
+  pop();
+}
+
+void keyPressed() {
+  if (key == 'g' || key == 'G')
+    drawGrid = !drawGrid;
 }

@@ -64,7 +64,6 @@ void draw() {
   
   fichas();
   
-
   cuentapixeles();
   print(contador1);
   print("       ");
@@ -317,8 +316,8 @@ void pez(){
   
   translate(650,200);
   pez =createShape();
-  pez.noStroke();
   pez.beginShape();
+  pez.noStroke();
   pez.fill(nivel);
   pez.noStroke();
   pez.vertex(0, 0);
@@ -388,7 +387,14 @@ void drawGrid(float scale) {
 void keyPressed() {
   if (key == 'g' || key == 'G')
     drawGrid = !drawGrid;
+  if (key == 'p' || key == 'P'){
+    reset();
+  }
 }
+
+
+
+
 
 
 void cuentapixeles(){
@@ -415,4 +421,39 @@ void cuentapixeles(){
      }
  } */
   
+}
+
+
+void reset(){
+       cx1 = 200;
+     cy1 = 300-l4;
+     cx2 =200-l4;
+     cy2= 300;
+    
+     cx3=(200+(3*l8));
+     cy3= 300+l4;
+    
+     cx4 =(200+(3*l8));
+     cy4 = 300-l4;
+    
+     cx5 =200;
+     cy5 = 300+l8;
+    
+     cxp=200 - l8;
+     cyp=300+ (3*l8);
+    
+     cxc=200+l4;
+     cyc=300;
+    //angulos iniciales
+     ang1=0;
+     ang2=0;
+     ang3=0;
+     ang4=0;
+     ang5=0;
+     angp=0;
+     angc=0;
+    
+    //escalas reflexión del paralelogramo
+     escx=1;
+     escy=1; 
 }

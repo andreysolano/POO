@@ -1,4 +1,4 @@
-float l= 340;  //equivalencias entre las figuras
+float l= 300;  //equivalencias entre las figuras
 float l2=l/2;
 float l4=l/4;
 float l8= l/8;
@@ -41,10 +41,11 @@ float escy=1;
 
 color negro = color(54,54,54);
 color nivel= color(245,206,197);
+//color nivel= color(255,255,255);
 
 PShape pez;
 boolean drawGrid = true;
-
+float contador1=0;
 
 void setup() {
   size(1200,600);
@@ -52,7 +53,9 @@ void setup() {
 void draw() {
   background(negro);
   strokeWeight(2);
-  
+  if (drawGrid){
+    drawGrid(10);
+  }
    
   push();
   pez();
@@ -61,27 +64,12 @@ void draw() {
   
   fichas();
   
-  if (drawGrid){
-    drawGrid(10);
-  }
-  
-  
-  
-  /* int cuenta= 0;
-  loadPixels();
-  for (int i = 0; i < (width*height/2)-width/2; i++) {
-    if(pixels[i] == negro); cuenta=cuenta +1;
-  }
-  
-  for ( int i = 0; i < height; i++) {
-   for (int j =0; j < width; j ++ ) { 
-      if(get(i,j)==nivel);cuenta=cuenta+1;
-     }
- }
-  
-  print(cuenta);
+
+  cuentapixeles();
+  print(contador1);
   print("       ");
-  */
+  
+ 
   
   
   
@@ -326,9 +314,10 @@ void cuadrado(float cx,float cy, float angulo){
 }
 
 void pez(){
- 
+  
   translate(650,200);
   pez =createShape();
+  pez.noStroke();
   pez.beginShape();
   pez.fill(nivel);
   pez.noStroke();
@@ -344,7 +333,8 @@ void pez(){
   pez.vertex(0,h1);
   pez.vertex(h2,h2);
   endShape(CLOSE);
-
+  
+  
 }
 
 
@@ -398,4 +388,31 @@ void drawGrid(float scale) {
 void keyPressed() {
   if (key == 'g' || key == 'G')
     drawGrid = !drawGrid;
+}
+
+
+void cuentapixeles(){
+  //recibir los pixeles del canvas
+  loadPixels();
+  // reiniciar contador de blancos
+  contador1=0;
+  // for que revise cada pixel del canvas
+  for(int i=0;i < (width*height/2)-width/2;i++){
+    //extraer los rgb de cada pixel
+    float r= red(pixels[i]) ;
+    float g= green(pixels[i]);
+    float b= blue(pixels[i]);
+    // comparar cada valor con los de blanco, y si es blanco el contador aumenta.
+    if(r==245 & g==206 & b==197){
+      contador1++;
+    }
+  }
+  
+  /* 
+  for ( int i = 0; i < height; i++) {
+   for (int j =0; j < width; j ++ ) { 
+      if(get(i,j)==nivel);cuenta=cuenta+1;
+     }
+ } */
+  
 }

@@ -47,11 +47,13 @@ float escy=1;
 
 color negro = color(54,54,54);
 color nivel= color(245,206,197);
-//color nivel= color(255,255,255);
+
 
 PShape pez;
 boolean drawGrid = true;
 float contador1=0;
+boolean n1= true;
+boolean n2= true;
 
 void setup() {
   size(1200,600);
@@ -63,17 +65,20 @@ void draw() {
     drawGrid(10);
   }
    
-  push();
-  pez();
-  shape(pez);
-  pop();
-  
-  fichas();
-  
-  cuentapixeles();
-  print(contador1);
-  print("       ");
-  
+   
+  if(n1==true){ 
+    push();
+    pez();
+    shape(pez);
+    pop();
+    
+    fichas();
+    
+    cuentapixeles();
+    print(contador1);
+    print("       ");
+    n1=win(contador1);
+  } else ganador();
  
   
   
@@ -343,6 +348,15 @@ void pez(){
 }
 
 
+void casa(){
+  
+  translate(650,200);
+  fill(nivel);
+  rect(50,50,50,50);
+
+}
+
+
 
 boolean seleccion(float cx, float cy){
   if(mouseButton == LEFT && encima(mouseX,mouseY, cx, cy, radius)) return true;
@@ -429,6 +443,18 @@ void cuentapixeles(){
   
 }
 
+boolean win(float contador){
+  if(contador<=50) return false;
+  else return true;
+}
+
+void ganador(){
+  fill (255);
+  textSize (100);
+  text("Ganaste!", mouseX, mouseY);
+
+}
+   
 
 void reset(){
        cx1 = 200;

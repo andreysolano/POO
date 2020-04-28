@@ -1,3 +1,9 @@
+//Bienvenido al Tangram 
+//con la tecla espacio rotas las fichas 45 grados
+// con la tecla R puedes rotar el paralelogramo
+// con la tecla P reinicias las fichas a sus posiciones iniciales
+
+
 float l= 300;  //equivalencias entre las figuras
 float l2=l/2;
 float l4=l/4;
@@ -403,7 +409,7 @@ void cuentapixeles(){
   // reiniciar contador de blancos
   contador1=0;
   // for que revise cada pixel del canvas
-  for(int i=0;i < (width*height/2)-width/2;i++){
+  for(int i=0;i<width*height;i++){
     //extraer los rgb de cada pixel
     float r= red(pixels[i]) ;
     float g= green(pixels[i]);

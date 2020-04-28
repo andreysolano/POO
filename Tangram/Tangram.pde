@@ -55,45 +55,54 @@ float contador1=0;
 boolean n1= true;
 boolean n2= true;
 
+boolean inicio = false;
+
 void setup() {
   size(1200,600);
 }
+
 void draw() {
+  
+  if (inicio == iniciar()) {
+     background (negro);
+    //Titulo
+    fill(235, 183, 52);
+    textSize(100);
+    text("SUPER TANGRAM", 200, height/4);
+
+    //Botón
+    fill(255, 255, 255);
+    float tam= random (5,10);
+    quad(510-tam, 350-tam, 710-tam, 350-tam, 710-tam, 450-tam, 510-tam,450-tam);
+    fill( 250, 110,50);
+    textSize(60-tam);
+    text("ENTER", 530-tam, 420-tam);
+    delay (300);
+  } else if (inicio!=iniciar()) {
+  inicio=true;
   background(negro);
   strokeWeight(2);
   if (drawGrid){
     drawGrid(10);
   }
-   
-   
-  if(n1==true){ 
+    if(n1==true){ 
     push();
     pez();
     shape(pez);
     pop();
-    
+
     fichas();
     
     cuentapixeles();
     print(contador1);
     print("       ");
     n1=win(contador1);
-  } else ganador();
- 
-  
-  
-  
+  } else ganador();  
+ }
 }
-
-
-
-
-
 
 void fichas(){
   
-
-
   //------BLOQUE TRIANGULO VERDE (1)----------//
   if(encima(mouseX,mouseY, cx1, cy1, radius)){
     fill(255,150,0);
@@ -223,13 +232,8 @@ void fichas(){
  if (tespacio(cxc,cyc)){
      angc +=45;
      delay(100);
-  }
-
-  
+  } 
 }
-
-
-
 
 //TRIANGULO VERDE
 void triangulo1(float cx,float cy, float angulo){
@@ -344,19 +348,7 @@ void pez(){
   pez.vertex(h2,h2);
   endShape(CLOSE);
   
-  
 }
-
-
-void casa(){
-  
-  translate(650,200);
-  fill(nivel);
-  rect(50,50,50,50);
-
-}
-
-
 
 boolean seleccion(float cx, float cy){
   if(mouseButton == LEFT && encima(mouseX,mouseY, cx, cy, radius)) return true;
@@ -389,6 +381,14 @@ boolean encima(float px, float py, float cx, float cy, float r) {
   }
   return false;
 }
+//para iniciar el juego presionando ENTER
+boolean iniciar (){
+  if(keyPressed){
+    if (key==ENTER)
+    return true;}
+  return false;
+}
+
 void drawGrid(float scale) {
   push();
   strokeWeight(1);
@@ -410,12 +410,8 @@ void keyPressed() {
   if (key == 'p' || key == 'P'){
     reset();
   }
+
 }
-
-
-
-
-
 
 void cuentapixeles(){
   //recibir los pixeles del canvas
@@ -444,15 +440,16 @@ void cuentapixeles(){
 }
 
 boolean win(float contador){
-  if(contador<=50) return false;
+  if(contador<50) return false;
   else return true;
 }
 
 void ganador(){
+  background (random (0,255), random (0,255), random(0,255));
   fill (255);
   textSize (100);
-  text("Ganaste!", mouseX, mouseY);
-
+  text("!Ganaste!", random (0,700), random (100,600));
+  delay (200);
 }
    
 

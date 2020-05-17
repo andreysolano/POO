@@ -23,13 +23,20 @@ class Square extends Triangle {
 
 
 class Parallelogram extends Triangle {
-
+int sha=0;
   Parallelogram(color tempc, float tempXpos, float tempYpos, float temp_e, float temp_ang) {
     super(tempc, tempXpos, tempYpos, temp_e, temp_ang);
   }
 
   void display() {
     super.display();
+    float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
+    if (degrees(delta) > 45) {    
+      escala=(escala*-1);
+      
+      println(sha+".shake");
+      sha=sha+1;
+    }
   }
 
   void dibujar() {
@@ -37,6 +44,7 @@ class Parallelogram extends Triangle {
     push();
     noStroke();
     translate(xpos, ypos);
+    scale(escala, escala);
     rotate(radians(angulo));
     quad(0-l8x, 0-l8x, 0+(3*l8x), 0-l8x, 0+l8x, 0+l8x, 0-(3*l8x), 0+l8x);
     stroke(0);

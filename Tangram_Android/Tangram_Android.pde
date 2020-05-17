@@ -1,8 +1,8 @@
 Triangle triangle1;
 Triangle triangle2;
 Triangle triangle3;
-
-
+Square square;
+Parallelogram parallelogram;
 
 void setup() {
   fullScreen();
@@ -15,6 +15,8 @@ void setup() {
   triangle2 = new Triangle(color(93, 241, 42), width/2, height/2, 2,0);
   //Triangulo morado 
   triangle3= new Triangle(color(152, 50, 138), 100,height/2, sqrt(2),0);
+  square=new Square(color(110, 44, 0),400,300,1,0);
+  parallelogram= new Parallelogram(color(113, 125, 126),500,300,1,0);
 }
 
 
@@ -25,6 +27,8 @@ void draw() {
   triangle1.display();
   triangle2.display();
   triangle3.display();
+  square.display();
+  parallelogram.display();
 }
 
 

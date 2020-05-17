@@ -9,18 +9,18 @@ void setup() {
   noStroke();
   fill(0);
   //Triangulo amarillo
-  triangle1 = new Triangle(color(238, 241, 42), width/4, height/4, 1);
+  triangle1 = new Triangle(color(238, 241, 42), width/4, height/4, 1,0);
   //Triangulo Verde
-  triangle2 = new Triangle(color(93, 241, 42), width/2, height/2, 2);
+  triangle2 = new Triangle(color(93, 241, 42), width/2, height/2, 2,0);
   //Triangulo morado 
-  triangle3= new Triangle(color(152, 50, 138), 100,height/2, sqrt(2));
+  triangle3= new Triangle(color(152, 50, 138), 100,height/2, sqrt(2),0);
 }
 
 
 
 void draw() {
   background(54,54,54);
-  drawGrid(30);
+  drawGrid(20);
   triangle1.display();
   triangle2.display();
   triangle3.display();

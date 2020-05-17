@@ -4,10 +4,10 @@ class Triangle {
   float xpos;
   float ypos;
   float escala;
-  float radius=25;
+  float radius=25*displayDensity;
   float angulo;
 
-  float l= 400;
+  float l= 200*displayDensity;
   float l4=l/4;
   float l8=l/8;
 
@@ -32,9 +32,9 @@ class Triangle {
       ypos=mouseY;
     }
 
-    if (tespacio(xpos, ypos)) {
+    if (multitouch(xpos, ypos)) {
       angulo +=45;
-      delay(100);
+      delay(200);
     }
   }
 
@@ -68,14 +68,14 @@ class Triangle {
   }
 
   boolean seleccion(float cx, float cy) {
-    if (mouseButton == LEFT && encima_figura(mouseX, mouseY, cx, cy, radius)) return true;
+    if (mousePressed && encima_figura(mouseX, mouseY, cx, cy, radius)) return true;
     else return false;
   }
 
 
-  boolean tespacio(float cx, float cy) {
-    if (keyPressed  && encima_figura(mouseX, mouseY, cx, cy, radius) ) {
-      if (key == ' ') return true;
+  boolean multitouch(float cx, float cy) {
+    if (touches.length>=3 && encima_figura(mouseX, mouseY, cx, cy, radius) ) {
+       return true;
     }
     return false;
   }

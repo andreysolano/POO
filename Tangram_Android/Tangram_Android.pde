@@ -7,6 +7,7 @@ Triangle triangle3;
 void setup() {
   fullScreen();
   noStroke();
+  orientation(LANDSCAPE);    
   fill(0);
   //Triangulo amarillo
   triangle1 = new Triangle(color(238, 241, 42), width/4, height/4, 1,0);
@@ -20,7 +21,7 @@ void setup() {
 
 void draw() {
   background(54,54,54);
-  drawGrid(20);
+  drawGrid(10);
   triangle1.display();
   triangle2.display();
   triangle3.display();
@@ -31,6 +32,7 @@ void draw() {
 
 void drawGrid(float scale) {
   push();
+  scale=scale*displayDensity;
   strokeWeight(1);
   int i;
   for (i=0; i<=width/scale; i++) {

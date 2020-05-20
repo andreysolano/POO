@@ -18,6 +18,8 @@ class Triangle {
     escala = temp_e;
     radius=radius*escala;
     angulo=temp_ang;
+    l4=l4*escala;
+    l8=l8*escala;
   }
 
   void display() {
@@ -39,19 +41,22 @@ class Triangle {
   }
 
   void dibujar() {
-    float l8x=l8*escala;
-    float l4x=l4*escala;
-
     push();
     noStroke();
     translate(xpos, ypos);
     rotate(radians(angulo));
-    triangle(0, 0-l8x, 0+l4x, 0+l8x, 0-l4x, 0+l8x);
+    figura();
     stroke(0);
     ellipse(0, 0, radius, radius);
     pop();
   }
-
+  
+ 
+ void figura(){
+   triangle(0, 0-l8, 0+l4, 0+l8, 0-l4, 0+l8);
+ }
+  
+  
   // POINT/CIRCLE
   boolean encima_figura(float px, float py, float cx, float cy, float r) {
     //obtiene la distancia entre el mouse y el centro del circulo
@@ -74,7 +79,7 @@ class Triangle {
 
 
   boolean multitouch(float cx, float cy) {
-    if (touches.length>=3 && encima_figura(mouseX, mouseY, cx, cy, radius) ) {
+    if (touches.length>=2 && encima_figura(mouseX, mouseY, cx, cy, radius) ) {
        return true;
     }
     return false;

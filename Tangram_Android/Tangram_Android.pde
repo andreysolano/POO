@@ -31,7 +31,7 @@ void setup() {
   
   square=new Square(color(110, 44, 0),400,300,1,0);
   
-  parallelogram= new Parallelogram(color(113, 125, 126),500,300,1,0);
+  parallelogram= new Parallelogram(color(113, 125, 126),1200,500,1,0);
 }
 
 

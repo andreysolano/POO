@@ -4,10 +4,6 @@ import android.hardware.SensorManager;
 KetaiSensor sensor;
 PVector accelerometer= new PVector();
 PVector p_accelerometer=new PVector();
-int shakeTime;
-
-
-
 
 Triangle triangle1;
 Triangle triangle2;
@@ -69,7 +65,7 @@ void drawGrid(float scale) {
 
 void onAccelerometerEvent(float x, float y, float z) {
  
-  accelerometer.x = x;                                  // 7
+  accelerometer.x = x;                                 
   accelerometer.y = y;
   accelerometer.z = z; 
   

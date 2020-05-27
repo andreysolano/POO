@@ -4,7 +4,6 @@ class Triangle {
   float xpos;
   float ypos;
   float escala;
-  float radius=25*displayDensity;
   float angulo;
 
   float l= 200*displayDensity;
@@ -16,7 +15,6 @@ class Triangle {
     xpos= tempXpos;
     ypos= tempYpos;
     escala = temp_e;
-    radius=radius*escala;
     angulo=temp_ang;
     l4=l4*escala;
     l8=l8*escala;
@@ -24,19 +22,17 @@ class Triangle {
 
   void display() {
 
-    if (encima_figura(mouseX, mouseY, xpos, ypos, radius)) {
-      fill(255, 150, 0);
-    } else fill(c);
+    fill(c);
     dibujar();
 
-    if (seleccion(xpos, ypos)) {
+    if (seleccion()) {
       xpos=mouseX;
       ypos=mouseY;
     }
 
-    if (multitouch(xpos, ypos)) {
+    if (multitouch()) {
       angulo +=45;
-      delay(200);
+      delay(250);
     }
   }
 
@@ -46,8 +42,6 @@ class Triangle {
     translate(xpos, ypos);
     rotate(radians(angulo));
     figura();
-    stroke(0);
-    ellipse(0, 0, radius, radius);
     pop();
   }
   
@@ -72,16 +66,26 @@ class Triangle {
     return false;
   }
 
-  boolean seleccion(float cx, float cy) {
-    if (mousePressed && encima_figura(mouseX, mouseY, cx, cy, radius)) return true;
+  boolean seleccion() {
+    if (mousePressed && above()) return true;
     else return false;
   }
 
 
-  boolean multitouch(float cx, float cy) {
-    if (touches.length>=2 && encima_figura(mouseX, mouseY, cx, cy, radius) ) {
+  boolean multitouch() {
+    if (touches.length>=2 && above() ) {
        return true;
     }
     return false;
   }
+  
+  boolean above() {
+  color col_mouse;
+  col_mouse= get(mouseX, mouseY);
+
+  if ((red(col_mouse)==red(c) && green(col_mouse)==green(c) && blue(col_mouse)==blue(c))) {
+    return true;
+  }
+  return false;
+}
 }

@@ -2,7 +2,6 @@ class Parallelogram extends Triangle {
   int shake=0;
   Parallelogram(color tempc, float tempXpos, float tempYpos, float temp_e, float temp_ang) {
     super(tempc, tempXpos, tempYpos, temp_e, temp_ang);
-    radius=radius*2*escala;
   }
 
   void display() {
@@ -11,7 +10,7 @@ class Parallelogram extends Triangle {
 
   void figura() {
     float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
-    if (encima_figura(mouseX, mouseY, xpos, ypos, radius) && degrees(delta)>70) {
+    if (degrees(delta)>70) {
       println(shake+".shake");
       shake=shake+1;
       delay(100);

@@ -21,11 +21,12 @@ class Triangle {
   }
 
   void display() {
-
+    
     fill(c);
     dibujar();
 
     if (seleccion()) {
+
       xpos=mouseX;
       ypos=mouseY;
     }
@@ -44,13 +45,13 @@ class Triangle {
     figura();
     pop();
   }
-  
- 
- void figura(){
-   triangle(0, 0-l8, 0+l4, 0+l8, 0-l4, 0+l8);
- }
-  
-  
+
+
+  void figura() {
+    triangle(0, 0-l8, 0+l4, 0+l8, 0-l4, 0+l8);
+  }
+
+
   // POINT/CIRCLE
   boolean encima_figura(float px, float py, float cx, float cy, float r) {
     //obtiene la distancia entre el mouse y el centro del circulo
@@ -67,25 +68,30 @@ class Triangle {
   }
 
   boolean seleccion() {
-    if (mousePressed && above()) return true;
+    if (mouseDragged() && above()) return true;
     else return false;
   }
 
 
   boolean multitouch() {
     if (touches.length>=2 && above() ) {
-       return true;
+      return true;
     }
     return false;
   }
   
-  boolean above() {
-  color col_mouse;
-  col_mouse= get(mouseX, mouseY);
-
-  if ((red(col_mouse)==red(c) && green(col_mouse)==green(c) && blue(col_mouse)==blue(c))) {
+  boolean mouseDragged() 
+  {
     return true;
   }
-  return false;
-}
+
+  boolean above() {
+    color col_mouse;
+    col_mouse= get(mouseX, mouseY);
+
+    if ((red(col_mouse)==red(c) && green(col_mouse)==green(c) && blue(col_mouse)==blue(c))) {
+      return true;
+    }
+    return false;
+  }
 }

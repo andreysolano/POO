@@ -8,39 +8,52 @@ PVector p_accelerometer=new PVector();
 Triangle triangle1;
 Triangle triangle2;
 Triangle triangle3;
+Triangle triangle4;
+Triangle triangle5;
 Square square;
 Parallelogram parallelogram;
 
 void setup() {
   fullScreen();
-  noStroke();
   orientation(LANDSCAPE);    
   fill(0);
   sensor = new KetaiSensor(this);
   sensor.start();
-  //Triangulo amarillo
-  triangle1 = new Triangle(color(238, 241, 42), width/4, height/4, 1,0);
   //Triangulo Verde
-  triangle2 = new Triangle(color(93, 241, 42), width/2, height/2, 2,0);
+  triangle1 = new Triangle(color(93, 241, 42), 0, height/2+400, 2, 0);
+
+  //Triangulo Rojo
+  triangle2 = new Triangle(color(255, 8, 0 ), 0, height/2+100, 2, 0);
+
   //Triangulo morado 
-  triangle3= new Triangle(color(152, 50, 138), 100,height/2, sqrt(2),0);
+  triangle3= new Triangle(color(152, 50, 138), 100, 0, sqrt(2), 0);
   
-  square=new Square(color(110, 44, 0),400,300,1,0);
+  parallelogram= new Parallelogram(color(113, 125, 126), 600, height, 1, 0);
   
-  parallelogram= new Parallelogram(color(113, 125, 126),1200,500,1,0);
+  square=new Square(color(110, 44, 0), 0, 300, 1, 45);
+
+  //Triangulo amarillo
+  triangle5 = new Triangle(color(238, 241, 42), width/4, 30, 1, 180);
+  
+  //Triangulo azul
+  triangle4 = new Triangle(color(50, 103, 152), width/4+400, 30, 1, 180);
 }
 
 
 
 void draw() {
-  background(54,54,54);
+  background(54, 54, 54);
   drawGrid(10);
   triangle1.display();
   triangle2.display();
   triangle3.display();
-  square.display();
   parallelogram.display();
-  p_accelerometer.set(accelerometer);  
+  square.display();
+  triangle4.display();
+  triangle5.display();
+  
+  
+  p_accelerometer.set(accelerometer);
 }
 
 
@@ -64,9 +77,8 @@ void drawGrid(float scale) {
 
 
 void onAccelerometerEvent(float x, float y, float z) {
- 
+
   accelerometer.x = x;                                 
   accelerometer.y = y;
-  accelerometer.z = z; 
-  
+  accelerometer.z = z;
 }

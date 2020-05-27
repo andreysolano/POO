@@ -4,9 +4,6 @@ class Parallelogram extends Triangle {
     super(tempc, tempXpos, tempYpos, temp_e, temp_ang);
   }
 
-  void display() {
-    super.display();
-  }
 
   void figura() {
     float delta = PVector.angleBetween(accelerometer, p_accelerometer); 

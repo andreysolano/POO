@@ -1,4 +1,5 @@
 class Parallelogram extends Triangle {
+
   int shake=0;
   Parallelogram(color tempc, float tempXpos, float tempYpos, float temp_e, float temp_ang) {
     super(tempc, tempXpos, tempYpos, temp_e, temp_ang);
@@ -6,6 +7,7 @@ class Parallelogram extends Triangle {
 
 
   void figura() {
+    //Comprueba en angulo que se forma entre los vectores del acelerometro
     float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
     if (degrees(delta)>70) {
       println(shake+".shake");
@@ -17,7 +19,15 @@ class Parallelogram extends Triangle {
     }
     if (shake>3 && shake<=6) {
       quad(0-(3*l8), 0-l8, 0+l8, 0-l8, 0+(3*l8), 0+l8, 0-l8, 0+l8);
-      if(shake>=6)shake=0;
+      if (shake>=6)shake=0;
     }
   }
+}
+
+//Lee los valores del sensor y los guarda en un PVector
+void onAccelerometerEvent(float x, float y, float z) {
+
+  accelerometer.x = x;                                 
+  accelerometer.y = y;
+  accelerometer.z = z;
 }

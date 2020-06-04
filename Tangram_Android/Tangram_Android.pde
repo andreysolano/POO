@@ -66,9 +66,12 @@ void draw() {
   cuentapixeles();
   println(contador1);  
   p_accelerometer.set(accelerometer);
-  float progress = displayDensity * (contador1*0.1/72000);
+  
+  
+  
+  float progress = (contador1-2000)/60000;
   fill(16, 255, 13);
-  print(width- (width*progress));
+  print(width - (width*progress));
   rect(0, 0, width-(width*progress), 10*displayDensity);
 }
 
@@ -106,7 +109,7 @@ void cuentapixeles() {
     float r= red(pixels[i]) ;
     float g= green(pixels[i]);
     float b= blue(pixels[i]);
-    i=i+4;
+    i=i+5;
     // comparar cada valor con los de blanco, y si es blanco el contador aumenta.
     if (r==245 & g==206 & b==197) {  
       contador1++;

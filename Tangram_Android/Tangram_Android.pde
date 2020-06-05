@@ -33,7 +33,7 @@ void setup() {
   triangle5 = new Triangle(color(238, 241, 42), width/4, 30, 1, 180);  //Triangulo amarillo
   triangle4 = new Triangle(color(50, 103, 152), width/4+400, 30, 1, 180); //Triangulo azul
 
-  nivel1= loadImage("nivel2.png");
+  nivel1= loadImage("nivel0.png");
 }
 
 
@@ -41,8 +41,7 @@ void setup() {
 void draw() {
   background(54, 54, 54);
   drawGrid(10);
-  imageMode(CENTER);
-  image(nivel1, width/2, height/5, 396*displayDensity, 396*displayDensity);
+  image(nivel1, 0, 50*displayDensity, 420*displayDensity, 420*displayDensity);
   triangle1.display();
   triangle2.display();
   triangle3.display();

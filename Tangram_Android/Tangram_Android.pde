@@ -141,7 +141,7 @@ void menu() {
   text("Niveles", 100 + width/4, 50 + 6*height/20, width/2, height/10);
   text("Modo Creador", 50 +width/4, 50 + 9*height/20, width/2, height/10);
   text("Instrucciones", 50 +width/4, 50 + 12*height/20, width/2, height/10);
-  text("Créditos", 100 + width/4, 50+ 15*height/20, width/2, height/10);
+  text("Creditos", 100 + width/4, 50+ 15*height/20, width/2, height/10);
 
 
 
@@ -204,21 +204,23 @@ void niveles() {
 
 
 
+
 //state 2 Modo creador  de niveles 
 void modo_creador() {
 
   background(116, 222, 120);
   drawGrid(3*displayDensity);
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+  boton_guardar = new Boton(width/2, height/2, 600, 600, 10, 1);
+  fill(255);
+  boton_guardar.display();
+
+  if (boton_guardar.click(mouseX, mouseY)) {
+      foto.reset();
+      sonido();
+      
+ 
+  }
 }
 
 
@@ -284,37 +286,13 @@ void nivelesp() {
   }
 }
 
-int shake=0;
 //state 6 Menú con los niveles creados por el usuario
 void nivelesc() {
-  
+
   background(190, 90, 200);
   drawGrid(3*displayDensity);
-  
-  boton_guardar = new Boton(width/2, height/2, 600, 600, 10, 1);
-  fill(255);
-  boton_guardar.display();
-  
-  if(boton_guardar.click(mouseX,mouseY)){
-    
-    foto.reset();
-    sonido();
-    
-  }
-  
-  
 
-  float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
-  if (degrees(delta)>70) {
-    println(shake+".shake");
-    shake=shake+1;
-    delay(100);
-  }
-  if (shake==3) {
-    foto.reset();
-    sonido();
-    shake=0;
-  }
+
 
 
 
@@ -325,9 +303,9 @@ void nivelesc() {
 
   /*
   
-  // int cant = dataFile("").list(png_filtro).length;
-  //println(cant);
-    int j=0;
+   // int cant = dataFile("").list(png_filtro).length;
+   //println(cant);
+   int j=0;
    int p=1;
    PImage [] niveles_creador = new PImage[2]; 
    Boton [] botones_creador = new Boton[2];
@@ -460,13 +438,13 @@ void cuentapixeles() {
 
 
 void figuras() {
-  triangle1 = new Triangle(color(93, 241, 42), 0, height/2+400, 2, 0);   //Triangulo Verde
-  triangle2 = new Triangle(color(255, 8, 0 ), 0, height/2+100, 2, 0);   //Triangulo Rojo
-  triangle3= new Triangle(color(152, 50, 138), 100, 0, sqrt(2), 0);  //Triangulo morado 
-  parallelogram= new Parallelogram(color(113, 125, 126), 600, height, 1, 0); //Paralelogramo
-  square=new Square(color(110, 44, 0), 0, 300, 1, 45); //Cuadrado
-  triangle5 = new Triangle(color(238, 241, 42), width/4, 30, 1, 180);  //Triangulo amarillo
-  triangle4 = new Triangle(color(50, 103, 152), width/4+400, 30, 1, 180); //Triangulo azul
+  triangle1 = new Triangle(color(93, 241, 42), 0, 9*height/10, 2, 0);   //Triangulo Verde
+  triangle2 = new Triangle(color(255, 8, 0 ), 0, 7*height/10, 2, 0);   //Triangulo Rojo
+  triangle3= new Triangle(color(152, 50, 138), 4*width/5, 9*height/10, sqrt(2), 0);  //Triangulo morado 
+  parallelogram= new Parallelogram(color(113, 125, 126), 2*width/5, 9*height/10, 1, 0); //Paralelogramo
+  square=new Square(color(110, 44, 0), 4*width/5, 7*height/10, 1, 45); //Cuadrado
+  triangle5 = new Triangle(color(238, 241, 42), 2*width/5, 7*height/10, 1, 135);  //Triangulo amarillo
+  triangle4 = new Triangle(color(50, 103, 152), 3*width/5, 7*height/10, 1, 135); //Triangulo azul
 }
 
 

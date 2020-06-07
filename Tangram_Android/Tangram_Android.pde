@@ -52,6 +52,14 @@ Triangle triangle5;
 Square square;
 Parallelogram parallelogram;
 
+Triangle triangle1c;
+Triangle triangle2c;
+Triangle triangle3c;
+Triangle triangle4c;
+Triangle triangle5c;
+Square squarec;
+Parallelogram parallelogramc;
+
 void setup() {
   fullScreen();
   orientation(PORTRAIT);    
@@ -75,6 +83,15 @@ void setup() {
   b1 = new Ball(50*displayDensity, color(34, 34, 232), 8, 4, "Andrey Solano");
   b2 = new Ball(50*displayDensity, color(255, 70, 243), 8, 4, "Oscar Olivos");
   b3 = new Ball(80*displayDensity, color(0, 255, 23), 2, 2, "Universidad Nacional de Colombia");
+  
+  
+  triangle1c = new Triangle(color(250,250,251), 0, 9*height/10, 2, 0);   //Triangulo Verde
+  triangle2c = new Triangle(color(250,250,252), 0, 7*height/10, 2, 0);   //Triangulo Rojo
+  triangle3c= new Triangle(color(250,250,253), 4*width/5, 9*height/10, sqrt(2), 0);  //Triangulo morado 
+  parallelogramc= new Parallelogram(color(250,251,250), 2*width/5, 9*height/10, 1, 0); //Paralelogramo
+  squarec=new Square(color(250,252,250), 4*width/5, 7*height/10, 1, 45); //Cuadrado
+  triangle5c = new Triangle(color(250,251,251), 2*width/5, 7*height/10, 1, 135);  //Triangulo amarillo
+  triangle4c = new Triangle(color(250,252,252), 3*width/5, 7*height/10, 1, 135); //Triangulo azul
 }
 
 
@@ -211,8 +228,8 @@ void modo_creador() {
   background(116, 222, 120);
   drawGrid(3*displayDensity);
 
-  boton_guardar = new Boton(0,0 , 300, 300, 10, 1);
-  fill(255);
+  boton_guardar = new Boton(0,0 ,width/10, width/10, 10, 1);
+  fill(0,80,100);
   boton_guardar.display();
 
   if (boton_guardar.click(mouseX, mouseY)) {
@@ -220,32 +237,26 @@ void modo_creador() {
       sonido();
   }
   
-  triangle1 = new Triangle(color(250), 0, 9*height/10, 2, 0);   //Triangulo Verde
-  triangle2 = new Triangle(color(250), 0, 7*height/10, 2, 0);   //Triangulo Rojo
-  triangle3= new Triangle(color(250), 4*width/5, 9*height/10, sqrt(2), 0);  //Triangulo morado 
-  parallelogram= new Parallelogram(color(250), 2*width/5, 9*height/10, 1, 0); //Paralelogramo
-  square=new Square(color(250), 4*width/5, 7*height/10, 1, 45); //Cuadrado
-  triangle5 = new Triangle(color(250), 2*width/5, 7*height/10, 1, 135);  //Triangulo amarillo
-  triangle4 = new Triangle(color(250), 3*width/5, 7*height/10, 1, 135); //Triangulo azul
+
+
   
+  triangle1c.display();
+  triangle2c.display();
+  triangle3c.display();
+  parallelogramc.display();
+  squarec.display();
+  triangle4c.display();
+  triangle5c.display();
+
+
+  triangle1c.seleccion();
+  triangle2c.seleccion();
+  triangle3c.seleccion();
+  parallelogramc.seleccion();
+  squarec.seleccion();
+  triangle4c.seleccion();
+  triangle5c.seleccion();
   
-    triangle1.display();
-  triangle2.display();
-  triangle3.display();
-  parallelogram.display();
-  square.display();
-  triangle4.display();
-  triangle5.display();
-
-
-  triangle1.seleccion();
-  triangle2.seleccion();
-  triangle3.seleccion();
-  parallelogram.seleccion();
-  square.seleccion();
-  triangle4.seleccion();
-  triangle5.seleccion();
-
   
   
   
@@ -383,6 +394,8 @@ void onBackPressed() {
 }
 
 
+
+// State 7 Juego Normal 
 void play(int i) {
   background(54, 54, 54);
   drawGrid(3*displayDensity);
@@ -423,7 +436,7 @@ void play(int i) {
     win();
   }
 }
-
+  
 
 
 
@@ -456,7 +469,7 @@ void drawGrid(float scale) {
 void cuentapixeles() {
   loadPixels();
   contador1=0;
-  for (int i=0; i<width*height; i++) {
+  for (int i=0; i< width/1.5 * height; i++) {
     float r= red(pixels[i]) ;
     float g= green(pixels[i]);
     float b= blue(pixels[i]);

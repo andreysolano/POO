@@ -48,6 +48,7 @@ class Triangle {
 
 
       if (touches.length>=2) {
+        print("gira!");
         angulo +=45;
         delay(250);
       }

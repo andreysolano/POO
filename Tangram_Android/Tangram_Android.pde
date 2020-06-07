@@ -1,17 +1,40 @@
+
+
 //Tangram Programado en Processing para Android +4.0
 
 //Libreria Ketai para los sensores del celular
 import ketai.sensors.*;
 import android.hardware.SensorManager;
 //import java.io.FilenameFilter;
+
+import android.media.MediaPlayer;
+import android.content.res.AssetFileDescriptor;
+import android.content.Context;
+import android.app.Activity;
+
+
+
+
 KetaiSensor sensor;
 PVector accelerometer= new PVector();
 PVector p_accelerometer=new PVector();
+
+MediaPlayer foto = new MediaPlayer();
+;
+Context context;
+Activity act;
+AssetFileDescriptor fd;
+
+
+
+
+
 float contador1=0;
 
 Boton_mini[] botones_niveles = new Boton_mini[16];
 Boton[] botones_dos = new Boton[2];
 Boton[] botones_menu= new Boton[4];
+Boton boton_guardar;
 PImage [] niveles= new PImage[16]; 
 int state=0;
 int nivel=0;
@@ -35,6 +58,11 @@ void setup() {
   fill(0);
   sensor = new KetaiSensor(this);
   sensor.start();
+
+  act = this.getActivity();
+  context = act.getApplicationContext();
+
+
 
   figuras();
 
@@ -96,7 +124,7 @@ void draw() {
 void menu() {
   background(120, 100, 250);
   drawGrid(3*displayDensity);
-  
+
   //Inicializacion Botones del menú
   for (int i = 0; i < botones_menu.length; i++) {
     botones_menu[i] = new Boton(width/4, ((6+3*i)*height)/20, width/2, height/10, 10, i);
@@ -142,14 +170,14 @@ void menu() {
 
 //state 1 Seleccionar modo de juego
 void niveles() {
-  
+
   background(234, 237, 105);
   drawGrid(3*displayDensity);
-  
+
   //Inicialización botones del selec niveles 
   botones_dos[0]= new Boton(width/10, 3*height/10, 7*width/20, 2*height/5, 10, 0);
   botones_dos[1]= new Boton(3*width/5, 3*height/10, 7*width/20, 2*height/5, 10, 1);
-  
+
   fill(0);
   botones_dos[0].display();
   botones_dos[1].display();
@@ -178,9 +206,19 @@ void niveles() {
 
 //state 2 Modo creador  de niveles 
 void modo_creador() {
-  
+
   background(116, 222, 120);
   drawGrid(3*displayDensity);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
 
 
@@ -189,7 +227,7 @@ void instructivo() {
 
   background(255, 255, 255);
   drawGrid(3*displayDensity);
-  
+
   textSize (80);
   fill (235, 183, 52);
   text ("Instrucciones", (width/2)-(textWidth ("Instrucciones")/2), height/6);
@@ -246,18 +284,52 @@ void nivelesp() {
   }
 }
 
-
+int shake=0;
 //state 6 Menú con los niveles creados por el usuario
 void nivelesc() {
-  int j=0;
-  int p=1;
-  // int cant = dataFile("").list(png_filtro).length;
-  //println(cant);
+  
   background(190, 90, 200);
   drawGrid(3*displayDensity);
+  
+  boton_guardar = new Boton(width/2, height/2, 600, 600, 10, 1);
+  fill(255);
+  boton_guardar.display();
+  
+  if(boton_guardar.click(mouseX,mouseY)){
+    
+    foto.reset();
+    sonido();
+    
+  }
+  
+  
+
+  float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
+  if (degrees(delta)>70) {
+    println(shake+".shake");
+    shake=shake+1;
+    delay(100);
+  }
+  if (shake==3) {
+    foto.reset();
+    sonido();
+    shake=0;
+  }
+
+
+
+
+
+
+
 
   /*
-  PImage [] niveles_creador = new PImage[2]; 
+  
+  // int cant = dataFile("").list(png_filtro).length;
+  //println(cant);
+    int j=0;
+   int p=1;
+   PImage [] niveles_creador = new PImage[2]; 
    Boton [] botones_creador = new Boton[2];
    
    for (int i=0; i<niveles_creador.length; i++) {
@@ -336,8 +408,8 @@ void play(int i) {
   fill(16, 255, 13);
   print(width - (width*progress));
   rect(0, 0, width-(width*progress), 10*displayDensity);
-  
-  if(contador1 < 1500){
+
+  if (contador1 < 1500) {
     win();
   }
 }
@@ -372,18 +444,13 @@ void drawGrid(float scale) {
 
 
 void cuentapixeles() {
-  //recibir los pixeles del canvas
   loadPixels();
-  // reiniciar contador de blancos
   contador1=0;
-  // for que revise cada pixel del canvas
   for (int i=0; i<width*height; i++) {
-    //extraer los rgb de cada pixel
     float r= red(pixels[i]) ;
     float g= green(pixels[i]);
     float b= blue(pixels[i]);
     i=i+5;
-    // comparar cada valor con los de blanco, y si es blanco el contador aumenta.
     if (r==245 & g==206 & b==197) {  
       contador1++;
     }
@@ -411,11 +478,31 @@ void figuras() {
  return name.startsWith("creador") && name.endsWith(".png");
  }
  };*/
- 
- void win(){
 
-  fill (random (0,255), random (0,255), random(0,255));
+void win() {
+
+  fill (random (0, 255), random (0, 255), random(0, 255));
   textSize (60*displayDensity);
-  text("!Ganaste!", random (0,width/2), random (0,height/2));
+  text("!Ganaste!", random (0, width/2), random (0, height/2));
   delay (200);
- }
+}
+
+void sonido() {
+
+
+  try {
+    fd = context.getAssets().openFd("foto.mp3");
+    foto.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+    foto.prepare();
+    foto.start();
+  }
+  catch (IllegalArgumentException e) {
+    e.printStackTrace();
+  }
+  catch (IllegalStateException e) {
+    e.printStackTrace();
+  } 
+  catch (IOException e) {
+    e.printStackTrace();
+  }
+}

@@ -211,16 +211,48 @@ void modo_creador() {
   background(116, 222, 120);
   drawGrid(3*displayDensity);
 
-  boton_guardar = new Boton(width/2, height/2, 600, 600, 10, 1);
+  boton_guardar = new Boton(0,0 , 300, 300, 10, 1);
   fill(255);
   boton_guardar.display();
 
   if (boton_guardar.click(mouseX, mouseY)) {
       foto.reset();
       sonido();
-      
- 
   }
+  
+  triangle1 = new Triangle(color(250), 0, 9*height/10, 2, 0);   //Triangulo Verde
+  triangle2 = new Triangle(color(250), 0, 7*height/10, 2, 0);   //Triangulo Rojo
+  triangle3= new Triangle(color(250), 4*width/5, 9*height/10, sqrt(2), 0);  //Triangulo morado 
+  parallelogram= new Parallelogram(color(250), 2*width/5, 9*height/10, 1, 0); //Paralelogramo
+  square=new Square(color(250), 4*width/5, 7*height/10, 1, 45); //Cuadrado
+  triangle5 = new Triangle(color(250), 2*width/5, 7*height/10, 1, 135);  //Triangulo amarillo
+  triangle4 = new Triangle(color(250), 3*width/5, 7*height/10, 1, 135); //Triangulo azul
+  
+  
+    triangle1.display();
+  triangle2.display();
+  triangle3.display();
+  parallelogram.display();
+  square.display();
+  triangle4.display();
+  triangle5.display();
+
+
+  triangle1.seleccion();
+  triangle2.seleccion();
+  triangle3.seleccion();
+  parallelogram.seleccion();
+  square.seleccion();
+  triangle4.seleccion();
+  triangle5.seleccion();
+
+  
+  
+  
+  
+  
+  
+  
 }
 
 

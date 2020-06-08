@@ -17,7 +17,8 @@ class Boton {
     num=tempnum;
     c= tempc*displayDensity;
   }    
-
+  
+  //Comprueba que se seleccione un botón 
   boolean click(float px, float py) {
     if (px >= x && px <= x + w && py >= y && py <= y + h && mousePressed) {  
       return true;
@@ -29,11 +30,5 @@ class Boton {
   void display() {
     stroke(0);
     rect(x, y, w, h,c);
-
-
-    if (click(mouseX, mouseY) && mousePressed) {
-      println(flag, ".outch");
-      flag=flag+1;
-    }
   }
 } 

@@ -1,50 +1,43 @@
-
-
 //Tangram Programado en Processing para Android +4.0
 
-//Libreria Ketai para los sensores del celular
-import ketai.sensors.*;
+import ketai.sensors.*;    //Libreria Ketai para los sensores del celular
 import android.hardware.SensorManager;
 //import java.io.FilenameFilter;
-
-import android.media.MediaPlayer;
+import android.media.MediaPlayer;                      //Librerias para reproducción de audio
 import android.content.res.AssetFileDescriptor;
 import android.content.Context;
 import android.app.Activity;
+import android.os.Environment;
 
 
-
-
-KetaiSensor sensor;
-PVector accelerometer= new PVector();
+KetaiSensor sensor;                           
+PVector accelerometer= new PVector(); 
 PVector p_accelerometer=new PVector();
 
 MediaPlayer foto = new MediaPlayer();
-;
 Context context;
 Activity act;
 AssetFileDescriptor fd;
 
-
-
-
-
-float contador1=0;
-
-Boton_mini[] botones_niveles = new Boton_mini[16];
+Boton_mini[] botones_niveles = new Boton_mini[16];   //Botones
 Boton[] botones_dos = new Boton[2];
 Boton[] botones_menu= new Boton[4];
 Boton boton_guardar;
-PImage [] niveles= new PImage[16]; 
-int state=0;
-int nivel=0;
 
-Ball b1;
+PImage [] niveles= new PImage[16];         //imagenes 
+PImage [] nivelesc = new PImage[20];
+PImage creador;
+
+
+Ball b1;                  //Crédito
 Ball b2;
 Ball b3;
 
+float contador1=0;          //Varibales contador 
+int state=0;
+int nivel=0;
 
-Triangle triangle1;
+Triangle triangle1;      //Figuras Modo normal 
 Triangle triangle2;
 Triangle triangle3;
 Triangle triangle4;
@@ -52,7 +45,7 @@ Triangle triangle5;
 Square square;
 Parallelogram parallelogram;
 
-Triangle triangle1c;
+Triangle triangle1c;     //Figuras Modo creador
 Triangle triangle2c;
 Triangle triangle3c;
 Triangle triangle4c;
@@ -64,13 +57,11 @@ void setup() {
   fullScreen();
   orientation(PORTRAIT);    
   fill(0);
+
   sensor = new KetaiSensor(this);
   sensor.start();
-
   act = this.getActivity();
   context = act.getApplicationContext();
-
-
 
   figuras();
 
@@ -79,24 +70,23 @@ void setup() {
     niveles[i]= loadImage("nivel"+i+".png");
   }
 
-
   b1 = new Ball(50*displayDensity, color(34, 34, 232), 8, 4, "Andrey Solano");
   b2 = new Ball(50*displayDensity, color(255, 70, 243), 8, 4, "Oscar Olivos");
   b3 = new Ball(80*displayDensity, color(0, 255, 23), 2, 2, "Universidad Nacional de Colombia");
-  
-  
-  triangle1c = new Triangle(color(250,250,251), 0, 9*height/10, 2, 0);   //Triangulo Verde
-  triangle2c = new Triangle(color(250,250,252), 0, 7*height/10, 2, 0);   //Triangulo Rojo
-  triangle3c= new Triangle(color(250,250,253), 4*width/5, 9*height/10, sqrt(2), 0);  //Triangulo morado 
-  parallelogramc= new Parallelogram(color(250,251,250), 2*width/5, 9*height/10, 1, 0); //Paralelogramo
-  squarec=new Square(color(250,252,250), 4*width/5, 7*height/10, 1, 45); //Cuadrado
-  triangle5c = new Triangle(color(250,251,251), 2*width/5, 7*height/10, 1, 135);  //Triangulo amarillo
-  triangle4c = new Triangle(color(250,252,252), 3*width/5, 7*height/10, 1, 135); //Triangulo azul
+
+  triangle1c = new Triangle(color(250, 250, 251), 0, 9*height/10, 2, 0);   //Figuras Modo Creador
+  triangle2c = new Triangle(color(250, 250, 252), 0, 7*height/10, 2, 0);   
+  triangle3c= new Triangle(color(250, 250, 253), 4*width/5, 9*height/10, sqrt(2), 0);  
+  parallelogramc= new Parallelogram(color(250, 251, 250), 2*width/5, 9*height/10, 1, 0); 
+  squarec=new Square(color(250, 252, 250), 4*width/5, 7*height/10, 1, 45); //Cuadrado
+  triangle5c = new Triangle(color(250, 251, 251), 2*width/5, 7*height/10, 1, 135);  
+  triangle4c = new Triangle(color(250, 252, 252), 3*width/5, 7*height/10, 1, 135);
 }
 
 
 
 void draw() {
+  //Swictch que controla El menú
   switch (state) {
   case 0: 
     menu();
@@ -137,7 +127,7 @@ void draw() {
   }
 }
 
-//state 0 Menú Principal
+//-------------------- STATE 0 MENU PRINCIPAL -----------------------------//
 void menu() {
   background(120, 100, 250);
   drawGrid(3*displayDensity);
@@ -161,8 +151,6 @@ void menu() {
   text("Creditos", 100 + width/4, 50+ 15*height/20, width/2, height/10);
 
 
-
-
   //Comprueba si se selecciono algún botón 
   if (botones_menu[0].click(mouseX, mouseY)) {
     state = 1;
@@ -183,9 +171,7 @@ void menu() {
 }
 
 
-
-
-//state 1 Seleccionar modo de juego
+//-------------------- STATE 1 SELECCIÓN DE NIVELES -----------------------------//
 void niveles() {
 
   background(234, 237, 105);
@@ -204,11 +190,7 @@ void niveles() {
   text("Niveles Juego", width/10, 4*height/10, 7*width/20, 2*height/5);
   text("Niveles Usuario", 3*width/5, 4*height/10, 7*width/20, 2*height/5 );
 
-
-
-
-
-
+  //comprueba se clickea un boton
   if (botones_dos[0].click(mouseX, mouseY)) {
     delay(300);
     state = 5;
@@ -222,24 +204,27 @@ void niveles() {
 
 
 
-//state 2 Modo creador  de niveles 
+//----------------------- STATE 2 MODO CREADOR ---------------------------------//
 void modo_creador() {
 
   background(116, 222, 120);
   drawGrid(3*displayDensity);
 
-  boton_guardar = new Boton(0,0 ,width/10, width/10, 10, 1);
-  fill(0,80,100);
+  boton_guardar = new Boton(0, 0, width/10, width/10, 10, 1);
+  fill(0, 80, 100);
   boton_guardar.display();
 
   if (boton_guardar.click(mouseX, mouseY)) {
-      foto.reset();
-      sonido();
+    foto.reset();
+    sonido();
+    //save ("nivelc0.png");
+    //nivelesc[0] = loadImage("nivelc.png");
+    creador = loadImage("nivelc1.png");
+    saveImage("nivelc1.png");
   }
-  
 
 
-  
+
   triangle1c.display();
   triangle2c.display();
   triangle3c.display();
@@ -256,18 +241,10 @@ void modo_creador() {
   squarec.seleccion();
   triangle4c.seleccion();
   triangle5c.seleccion();
-  
-  
-  
-  
-  
-  
-  
-  
 }
 
 
-//state 3 Instrucciones 
+//-------------------- STATE 3 INSTRUCCIONES -----------------------------//
 void instructivo() {
 
   background(255, 255, 255);
@@ -278,7 +255,8 @@ void instructivo() {
   text ("Instrucciones", (width/2)-(textWidth ("Instrucciones")/2), height/6);
 }
 
-//state 4 Créditos 
+
+//-------------------- STATE 4 CREDITOS -----------------------------//
 void acerca() {
 
   background(115, 80, 80);
@@ -286,10 +264,6 @@ void acerca() {
   textSize (35*displayDensity);
   fill (235, 183, 52);
   text ("Los creadores:", (width/2)-(textWidth ("Instrucciones")/2), height/6);
-
-
-
-
   b1.display();
   b2.display();
   b3.display();
@@ -298,7 +272,7 @@ void acerca() {
 
 
 
-//state 5 Menú con los niveles predeterminados del juego 
+//-----------------VISUALIZACIÓN DE LOS NIVELES PREDETERMINADOS ------------------------//
 void nivelesp() {
   background(105, 223, 237);
   drawGrid(3*displayDensity);
@@ -317,6 +291,7 @@ void nivelesp() {
 
   //Reinicia la posición de las figuras
   figuras();
+
   fill(255);
   //Mostrar Botones de la sección niveles
   for (int i = 0; i < botones_niveles.length; i++) {
@@ -329,19 +304,34 @@ void nivelesp() {
   }
 }
 
-//state 6 Menú con los niveles creados por el usuario
+
+//-------------------- VISUALIZACIÓN NIVELES CREADOS POR EL USUARIO -----------------------------//
 void nivelesc() {
 
   background(190, 90, 200);
   drawGrid(3*displayDensity);
 
 
+  image(creador, 0, 0);
+
+  figuras();
+
+  triangle1.display();
+  triangle2.display();
+  triangle3.display();
+  parallelogram.display();
+  square.display();
+  triangle4.display();
+  triangle5.display();
 
 
-
-
-
-
+  triangle1.seleccion();
+  triangle2.seleccion();
+  triangle3.seleccion();
+  parallelogram.seleccion();
+  square.seleccion();
+  triangle4.seleccion();
+  triangle5.seleccion();
 
 
   /*
@@ -385,17 +375,8 @@ void nivelesc() {
    */
 }
 
-// Funcion que cambia el state
-void onBackPressed() {
-  delay(300);
-  if (state==5 || state==6) state=1;
-  if (state==7) state=5;
-  else state=0;
-}
 
-
-
-// State 7 Juego Normal 
+//-------------------- MODO DE JUEGO NORMAL -----------------------------//
 void play(int i) {
   background(54, 54, 54);
   drawGrid(3*displayDensity);
@@ -418,34 +399,30 @@ void play(int i) {
   triangle4.seleccion();
   triangle5.seleccion();
 
-
-
-
   cuentapixeles();
   println(contador1);  
   p_accelerometer.set(accelerometer);
 
-
-
+  //Barra de progreso
   float progress = (contador1-2000)/41130;
   fill(16, 255, 13);
   print(width - (width*progress));
   rect(0, 0, width-(width*progress), 10*displayDensity);
 
-  if (contador1 < 1500) {
+  if (contador1 < 1500) {   //Cromprueba se hay un ganador 
     win();
   }
 }
-  
 
+// Funcion que devuelve un state en caso de presionar el boton Back
+void onBackPressed() {
+  delay(300);
+  if (state==5 || state==6) state=1;
+  if (state==7) state=5;
+  else state=0;
+}
 
-
-
-
-
-
-
-
+//Funcion que dibuja la cuadricula
 void drawGrid(float scale) {
   push();
   scale=scale*displayDensity;
@@ -462,10 +439,7 @@ void drawGrid(float scale) {
   pop();
 }
 
-
-
-
-
+// Función de cuenta los pixeles para comprobar el progreso
 void cuentapixeles() {
   loadPixels();
   contador1=0;
@@ -481,7 +455,7 @@ void cuentapixeles() {
 }
 
 
-
+// Inicialización de las figuras
 void figuras() {
   triangle1 = new Triangle(color(93, 241, 42), 0, 9*height/10, 2, 0);   //Triangulo Verde
   triangle2 = new Triangle(color(255, 8, 0 ), 0, 7*height/10, 2, 0);   //Triangulo Rojo
@@ -493,26 +467,16 @@ void figuras() {
 }
 
 
-
-/*
-//Filtro para imagenes del modo creador 
- static final FilenameFilter png_filtro = new FilenameFilter() {
- @ Override boolean accept(File path, String name) {
- return name.startsWith("creador") && name.endsWith(".png");
- }
- };*/
-
+// Muestra el mensaje ganador!
 void win() {
-
   fill (random (0, 255), random (0, 255), random(0, 255));
   textSize (60*displayDensity);
   text("!Ganaste!", random (0, width/2), random (0, height/2));
   delay (200);
 }
 
+// Carga  los sonidos del juego
 void sonido() {
-
-
   try {
     fd = context.getAssets().openFd("foto.mp3");
     foto.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
@@ -529,3 +493,36 @@ void sonido() {
     e.printStackTrace();
   }
 }
+
+
+void saveImage(String s) {
+  try
+  {
+
+    String directory = new String(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myFolder");
+    File myFolder = new File(directory);
+
+    boolean success = true;
+    if (!myFolder.exists()) {
+      success = myFolder.mkdirs();
+    }
+
+    creador.save(directory + "/" + s);
+    println("File saved successfully.");
+  } 
+
+  catch (Exception e) 
+  {
+
+    println("Error while saving file: " + e);
+  }
+}
+
+
+/*
+//Filtro para imagenes del modo creador 
+ static final FilenameFilter png_filtro = new FilenameFilter() {
+ @ Override boolean accept(File path, String name) {
+ return name.startsWith("creador") && name.endsWith(".png");
+ }
+ };*/

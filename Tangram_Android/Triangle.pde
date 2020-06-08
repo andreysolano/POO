@@ -5,7 +5,6 @@ class Triangle {
   float ypos;
   float escala;
   float angulo;
-
   float l= 170*displayDensity;
   float l4=l/4;
   float l8=l/8;
@@ -20,7 +19,6 @@ class Triangle {
     l8=l8*escala;
   }
 
-
   void display() {
     fill(c);
     push();
@@ -31,11 +29,9 @@ class Triangle {
     pop();
   }
 
-
   void figura() {
     triangle(0, 0-l8, 0+l4, 0+l8, 0-l4, 0+l8);
   }
-
 
   void seleccion() {
 
@@ -43,15 +39,7 @@ class Triangle {
     col_mouse= get(mouseX, mouseY);
 
     if ((red(col_mouse)==red(c) && green(col_mouse)==green(c) && blue(col_mouse)==blue(c))) {
-
       mouseDragged();
-
-
-      if (touches.length>=2) {
-        print("gira!");
-        angulo +=45;
-        delay(250);
-      }
     }
   }  
   void mouseDragged() {

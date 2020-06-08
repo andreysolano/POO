@@ -7,6 +7,7 @@ class Parallelogram extends Triangle {
 
 
   void figura() {
+    
     //Comprueba en angulo que se forma entre los vectores del acelerometro
     float delta = PVector.angleBetween(accelerometer, p_accelerometer); 
     if (degrees(delta)>70) {

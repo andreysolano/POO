@@ -1,5 +1,4 @@
 //Clase Boton con miniatura 
-
 class Boton_mini extends Boton {
 
 

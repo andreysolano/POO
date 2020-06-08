@@ -312,7 +312,7 @@ void nivelesc() {
   drawGrid(3*displayDensity);
 
 
-  image(creador, 0, 0);
+  //image(creador, 0, 0);
 
   figuras();
 

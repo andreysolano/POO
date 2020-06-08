@@ -40,6 +40,11 @@ class Triangle {
 
     if ((red(col_mouse)==red(c) && green(col_mouse)==green(c) && blue(col_mouse)==blue(c))) {
       mouseDragged();
+
+      if (touches.length>=2) {
+        angulo +=45;
+        delay(250);
+      }
     }
   }  
   void mouseDragged() {

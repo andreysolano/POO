@@ -18,7 +18,7 @@ let r_WristY = 0;
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
-  //video.hide();
+  video.hide();
   console.log(ml5);
   poseNet = ml5.poseNet(video, modelReady);
   poseNet.on('pose', gotPoses);
@@ -26,13 +26,14 @@ function setup() {
 
 
 function draw() {
-
+   
   //image(video, 0, 0);
 
   let d = dist(noseX, noseY, eye1X, eye1Y);
+  noStroke();
   fill(255, 0, 0);
+  
   ellipse(r_WristX, r_WristY, d);
-
 
   //fill(0 , 255, 0);
   //ellipse(eye1X, eye1Y, d);
@@ -59,7 +60,7 @@ function gotPoses(poses) {
     eye1X = lerp(eye1X, eX, 0.5);
     eye1Y = lerp(eye1Y, eY, 0.5);
 
-    r_WristX = lerp(r_WristX, wX, 0.5);
-    r_WristY = lerp(r_WristY, wY, 0.5);
+    r_WristX = lerp(r_WristX, wX, 0.2);
+    r_WristY = lerp(r_WristY, wY, 0.2);
   }
 }

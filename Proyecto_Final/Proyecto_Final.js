@@ -13,12 +13,18 @@ let eye1Y = 0;
 let r_WristX = 0;
 let r_WristY = 0;
 
+let l_WristX = 0;
+let l_WristY = 0;
+
+let flag = true;
+
 
 
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
-  video.hide();
+  //video.hide();
+
   console.log(ml5);
   poseNet = ml5.poseNet(video, modelReady);
   poseNet.on('pose', gotPoses);
@@ -26,14 +32,27 @@ function setup() {
 
 
 function draw() {
-   
-  //image(video, 0, 0);
+  //background(255);
+  translate(video.width, 0);
+  scale(-1, 1);
+  //image(video, 0, 0, video.width, video.height);
 
   let d = dist(noseX, noseY, eye1X, eye1Y);
   noStroke();
-  fill(255, 0, 0);
+
+  if (l_WristY >= 300) {
+    fill(255, 0, 0);
+    ellipse(r_WristX, r_WristY, d);
+  } else {
+    //fill(0, 255, 0);
+    //ellipse(r_WristX, r_WristY, d);
+  }
   
-  ellipse(r_WristX, r_WristY, d);
+  push();
+  fill(0,0,0);
+  //text(l_WristY, l_WristX, l_WristY);
+  pop();
+
 
   //fill(0 , 255, 0);
   //ellipse(eye1X, eye1Y, d);
@@ -53,6 +72,8 @@ function gotPoses(poses) {
     let eY = poses[0].pose.keypoints[1].position.y;
     let wX = poses[0].pose.keypoints[10].position.x;
     let wY = poses[0].pose.keypoints[10].position.y;
+    let lwX = poses[0].pose.keypoints[9].position.x;
+    let lwY = poses[0].pose.keypoints[9].position.y;
 
 
     noseX = lerp(noseX, nX, 0.5);
@@ -62,5 +83,8 @@ function gotPoses(poses) {
 
     r_WristX = lerp(r_WristX, wX, 0.2);
     r_WristY = lerp(r_WristY, wY, 0.2);
+
+    l_WristX = lerp(l_WristX, lwX, 0.2);
+    l_WristY = lerp(l_WristY, lwY, 0.2);
   }
 }

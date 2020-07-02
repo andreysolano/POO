@@ -1,5 +1,5 @@
-class Boton{
-  constructor(x, y, w, h, num){
+class Boton {
+  constructor(x, y, w, h, num) {
     this.x = x; 
     this.y = y; 
     this.w = w;
@@ -7,16 +7,22 @@ class Boton{
     this.num = num;
   }
 
-  show() {
-    noStroke();
-    rect(this.x, this.y, this.w , this.h);
-  }
 
   click(px, py) {
-    if (this.x >= this.x && px <= this.x + this.w && py >= this.y && py <= this.y + this.h ) {  
+    if (px >= this.x &&        //Esquina sup. izquierda
+      px <= this.x + this.w &&   // Esquina sup. derecha
+      py >= this.y &&        // Esquina infe. izquierda
+      py <= this.y + this.h) {   //Esquina infe. derecha 
       return true;
     }
     return false;
   }
 
+
+  show() {
+    noStroke();
+    rectMode(CORNER);
+    fill (120,235,0);
+    rect(this.x, this.y, this.w, this.h);
+  }
 }

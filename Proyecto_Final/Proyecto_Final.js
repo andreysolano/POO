@@ -10,10 +10,8 @@ let noseY = 0;
 let eye1X = 0;
 let eye1Y = 0; 
 
-
 let r_Wrist = new p5.Vector();
-let r_WristX = 0;
-let r_WristY = 0;
+let l_Wrist = new p5.Vector();
 
 let l_WristX = 0;
 let l_WristY = 0;
@@ -21,47 +19,44 @@ let l_WristY = 0;
 let boton1 ;
 
 
-
-
 function setup() {
   createCanvas(640, 480);
   video = createCapture(VIDEO);
+
   //video.hide();
+
 
   console.log(ml5);
   poseNet = ml5.poseNet(video, modelReady);
   poseNet.on('pose', gotPoses);
 
-  boton1 = new Boton(0, 0, 40, 40, 1); 
-
+  boton1 = new Boton(canvas.width, 0, 100, 100, 1);
 }
+
+
+
 
 
 function draw() {
 
-  push();
   translate(video.width, 0);
   scale(-1, 1);
+
   //image(video, 0, 0, video.width, video.height);
-  
-  
+
+
   let d = dist(noseX, noseY, eye1X, eye1Y);
   noStroke();
 
-  if (l_WristY >= 300) {
+  if (l_Wrist.y >= 100 ) {
     fill(255, 0, 0);
     ellipse(r_Wrist.x, r_Wrist.y, d);
   } else {
     fill(255);
     ellipse(r_Wrist.x, r_Wrist.y, d);
   }
-  pop();
-  
-  
-  fill(35,120,56);
-  boton1.show();
-  
 
+  boton1.show();
 }
 
 
@@ -71,7 +66,8 @@ function modelReady() {
 
 
 function gotPoses(poses) {
-  //console.log(poses);
+
+
   if (poses.length > 0) {
     let nX = poses[0].pose.keypoints[0].position.x;
     let nY = poses[0].pose.keypoints[0].position.y;
@@ -91,7 +87,7 @@ function gotPoses(poses) {
     r_Wrist.x = lerp(r_Wrist.x, wX, 0.2);
     r_Wrist.y = lerp(r_Wrist.y, wY, 0.2);
 
-    l_WristX = lerp(l_WristX, lwX, 0.2);
-    l_WristY = lerp(l_WristY, lwY, 0.2);
+    l_Wrist.x = lerp(l_Wrist.x, lwX, 0.2);
+    l_Wrist.y = lerp(l_Wrist.y, lwY, 0.2);
   }
 }

@@ -18,6 +18,8 @@ let l_WristY = 0;
 
 let boton1 ;
 
+let clicks = 0;
+
 
 function setup() {
   createCanvas(640, 480);
@@ -31,34 +33,10 @@ function setup() {
   poseNet.on('pose', gotPoses);
 
   boton1 = new Boton(canvas.width, 0, 100, 100, 1);
+
+  button = createButton('Cambiar Color! ');
+  button.position(canvas.width/2, canvas.height/2);
 }
-
-
-
-
-
-function draw() {
-
-  translate(video.width, 0);
-  scale(-1, 1);
-
-  //image(video, 0, 0, video.width, video.height);
-
-
-  let d = dist(noseX, noseY, eye1X, eye1Y);
-  noStroke();
-
-  if (l_Wrist.y >= 100 ) {
-    fill(255, 0, 0);
-    ellipse(r_Wrist.x, r_Wrist.y, d);
-  } else {
-    fill(255);
-    ellipse(r_Wrist.x, r_Wrist.y, d);
-  }
-
-  boton1.show();
-}
-
 
 function modelReady() {
   console.log('model ready');
@@ -66,7 +44,6 @@ function modelReady() {
 
 
 function gotPoses(poses) {
-
 
   if (poses.length > 0) {
     let nX = poses[0].pose.keypoints[0].position.x;
@@ -84,10 +61,51 @@ function gotPoses(poses) {
     eye1X = lerp(eye1X, eX, 0.5);
     eye1Y = lerp(eye1Y, eY, 0.5);
 
+
     r_Wrist.x = lerp(r_Wrist.x, wX, 0.2);
     r_Wrist.y = lerp(r_Wrist.y, wY, 0.2);
 
     l_Wrist.x = lerp(l_Wrist.x, lwX, 0.2);
     l_Wrist.y = lerp(l_Wrist.y, lwY, 0.2);
   }
+}
+
+
+
+
+
+function draw() {
+
+  translate(video.width, 0);
+  scale(-1, 1);
+
+  image(video, 0, 0, video.width, video.height);
+
+
+  let d = dist(noseX, noseY, eye1X, eye1Y);
+  noStroke();
+
+  if (l_Wrist.y >= 100 ) {
+    //fill(255, 0, 0);
+    ellipse(r_Wrist.x, r_Wrist.y, d);
+  } else {
+    fill(255);
+    //ellipse(r_Wrist.x, r_Wrist.y, d);
+  }
+
+  //fill(0, 255, 0);
+  ellipse( noseX, noseY, 30);
+
+  if ((noseX > button.x) && (noseX < (button.width + button.x)) && (noseY > button.y) && ((noseY < (button.height + button.y)))) {
+    r = random(255);
+    g = random(255);
+    b = random(255);
+
+    fill(r, g, b);
+    
+    print( "CLICK" );
+
+  }
+
+
 }

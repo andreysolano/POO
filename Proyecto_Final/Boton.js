@@ -8,15 +8,7 @@ class Boton {
   }
 
 
-  click(px, py) {
-    if (px >= this.x &&        //Esquina sup. izquierda
-      px <= this.x + this.w &&   // Esquina sup. derecha
-      py >= this.y &&        // Esquina infe. izquierda
-      py <= this.y + this.h) {   //Esquina infe. derecha 
-      return true;
-    }
-    return false;
-  }
+
 
 
   show() {

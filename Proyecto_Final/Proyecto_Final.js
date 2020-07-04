@@ -5,23 +5,19 @@
 
 let video;
 let poseNet;
-let noseX = 0;
-let noseY = 0;
+let nose = new p5.Vector();
+
 let eye1X = 0;
 let eye1Y = 0; 
 
 let r_Wrist = new p5.Vector();
 let l_Wrist = new p5.Vector();
 
-let l_WristX = 0;
-let l_WristY = 0;
 
-let boton1 ;
-
-let clicks = 0;
 
 
 function setup() {
+
   createCanvas(640, 480);
   video = createCapture(VIDEO);
 
@@ -32,10 +28,9 @@ function setup() {
   poseNet = ml5.poseNet(video, modelReady);
   poseNet.on('pose', gotPoses);
 
-  boton1 = new Boton(canvas.width, 0, 100, 100, 1);
 
-  button = createButton('Cambiar Color! ');
-  button.position(canvas.width/2, canvas.height/2);
+
+  rect(0, 0, 100, 100);
 }
 
 function modelReady() {
@@ -56,8 +51,8 @@ function gotPoses(poses) {
     let lwY = poses[0].pose.keypoints[9].position.y;
 
 
-    noseX = lerp(noseX, nX, 0.5);
-    noseY = lerp(noseY, nY, 0.5);
+    nose.x = lerp(nose.x, nX, 0.5);
+    nose.y = lerp(nose.y, nY, 0.5);
     eye1X = lerp(eye1X, eX, 0.5);
     eye1Y = lerp(eye1Y, eY, 0.5);
 
@@ -79,33 +74,48 @@ function draw() {
   translate(video.width, 0);
   scale(-1, 1);
 
-  image(video, 0, 0, video.width, video.height);
+  //image(video, 0, 0, video.width, video.height);
 
 
-  let d = dist(noseX, noseY, eye1X, eye1Y);
+  let d = dist(nose.x, nose.y, eye1X, eye1Y);
   noStroke();
 
-  if (l_Wrist.y >= 100 ) {
-    //fill(255, 0, 0);
-    ellipse(r_Wrist.x, r_Wrist.y, d);
-  } else {
+
+  if ((l_Wrist.x > 0) && (l_Wrist.x < 100) && (l_Wrist.y > 0) && ((l_Wrist.y < 100))) {
     fill(255);
-    //ellipse(r_Wrist.x, r_Wrist.y, d);
-  }
-
-  //fill(0, 255, 0);
-  ellipse( noseX, noseY, 30);
-
-  if ((noseX > button.x) && (noseX < (button.width + button.x)) && (noseY > button.y) && ((noseY < (button.height + button.y)))) {
-    r = random(255);
-    g = random(255);
-    b = random(255);
-
-    fill(r, g, b);
-    
-    print( "CLICK" );
-
+    ellipse(r_Wrist.x, r_Wrist.y, d);
+  } else {   
+    fill(255, 0, 0);
+    ellipse(r_Wrist.x, r_Wrist.y, d);
   }
 
 
+
+
+
+
+  /*if (click(0, 0, 100, 100, l_Wrist.x, l_Wrist.y   ) ) {
+   fill(255, 0, 0);
+   ellipse(r_Wrist.x, r_Wrist.y, d);
+   } else {
+   fill(255);
+   ellipse(r_Wrist.x, r_Wrist.y, d);
+   }*/
+}
+
+
+
+
+
+
+
+
+
+function click( x, y, w, h, px, py) {
+
+  if (px >= x && px <= x + w && py >= y && py <= y + h) {  
+    return true;
+  } else {
+    return false;
+  }
 }

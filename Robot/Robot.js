@@ -1,5 +1,12 @@
-// https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5 
+//--------------------------- ROBOT ARM ------------------------//
+//Instrucciones: 
+// 1. Ubicarse a por lo menos dos metros de la camara, enfocando al menos sobre las rodillas.
+// 2. La mano derecha controlará el brazo del robot, El movimineto vertical y el horizontal. <Controles invertidos>
+// 3. La mano derecha controlará el moviemiento de la cámara.
 
+// El código utiliza PoseNet, mediante la libreria de de ml5.js  ---> https://ml5js.org/
+// Además usa WEBGL para la renderización del brazo róbotico   ---> https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5 
+// El diseño del brazo fue realizado por Coretech ---> https://www.dropbox.com/s/sr4gk1y5mlxrrid/demoRobot.zip?dl=1
 
 let video;
 let poseNet;
@@ -12,9 +19,11 @@ let shoulder;
 let upArm;
 let loArm;
 let end;
+
 let angle = 0;
+
+
 function preload() {
-  tiger = loadModel('data/tiger.obj');
   base = loadModel('data/r1.obj');
   shoulder = loadModel('data/r2.obj');
   upArm = loadModel('data/r3.obj');
@@ -34,7 +43,7 @@ function modelReady() {
 }
 
 function gotPoses(poses) {
-
+  
   if (poses.length > 0) {
 
     let wX = poses[0].pose.keypoints[10].position.x;
@@ -77,10 +86,6 @@ function draw() {
   
   rotate(PI);
   scale(3);
-  
-
-  
-  
   
   push();
   translate(0, -33, 0);

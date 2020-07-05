@@ -13,6 +13,8 @@ let poseNet;
 
 let r_Wrist = new p5.Vector();
 let l_Wrist = new p5.Vector();
+let l_Eye = new p5.Vector();
+let r_Eye = new p5.Vector();
 
 let base;
 let shoulder;
@@ -43,18 +45,26 @@ function modelReady() {
 }
 
 function gotPoses(poses) {
-  
+
   if (poses.length > 0) {
 
     let wX = poses[0].pose.keypoints[10].position.x;
     let wY = poses[0].pose.keypoints[10].position.y;
     let lwX = poses[0].pose.keypoints[9].position.x;
     let lwY = poses[0].pose.keypoints[9].position.y;
+    let leftEyeX = poses[0].pose.keypoints[1].position.x;
+    let leftEyeY = poses[0].pose.keypoints[1].position.y;
+    let rightEyeX = poses[0].pose.keypoints[2].position.x;
+    let rightEyeY = poses[0].pose.keypoints[2].position.y;
 
-    r_Wrist.x = lerp(r_Wrist.x, wX, 0.6);
-    r_Wrist.y = lerp(r_Wrist.y, wY, 0.6);
-    l_Wrist.x = lerp(l_Wrist.x, lwX, 0.6);
-    l_Wrist.y = lerp(l_Wrist.y, lwY, 0.6);
+    l_Eye.x = lerp(l_Eye.x, leftEyeX, 0.4); 
+    l_Eye.y = lerp(l_Eye.y, leftEyeY, 0.4);
+    r_Eye.x = lerp(r_Eye.x, rightEyeX, 0.4); 
+    r_Eye.y = lerp(r_Eye.y, rightEyeY, 0.4); 
+    r_Wrist.x = lerp(r_Wrist.x, wX, 0.2);
+    r_Wrist.y = lerp(r_Wrist.y, wY, 0.2);
+    l_Wrist.x = lerp(l_Wrist.x, lwX, 0.1);
+    l_Wrist.y = lerp(l_Wrist.y, lwY, 0.1);
   }
 }
 
@@ -69,24 +79,29 @@ function draw() {
   ambientLight(113, 113, 113);
   noStroke();
 
-
+  let zoom = dist(l_Eye.x, l_Eye.y, r_Eye.x, r_Eye.y);
 
   let x2 = map(r_Wrist.x, 0, width, 0, 10, true);
   let y2 = map(r_Wrist.y, 0, height, 7, 18, true);
   let x3 = map(l_Wrist.x, 0, width, 15, 25, true);
+  let x4 = map( zoom, 15, 100, -250, 500, true );
+  let prueba = map( mouseX, 0, width, -1000, 1000, true);
   
+  //print(zoom);
+  translate(0, 0, x4);
+  rotateY(x3);
   push();
-  translate(0,175);
-  fill(12, 191,10);
+  translate(0, 175);
+  fill(12, 191, 10);
   rotateX(HALF_PI);
-  plane(1000,1000);
+  plane(1000, 1000);
   pop();
-  
-  
-  
+
+
+
   rotate(PI);
   scale(3);
-  
+
   push();
   translate(0, -33, 0);
   specularMaterial(250, 0, 0);
@@ -94,7 +109,7 @@ function draw() {
   model(end);
   pop();
 
-  rotateY(x3);
+
 
   fill('#FFE308');
   translate(0, -30, 0);
@@ -110,7 +125,6 @@ function draw() {
   specularMaterial(250, 255, 0);
   fill('#FFF700');
   model(shoulder);
-
 
   translate(0, 0, 50);
   rotateX(degrees(30));

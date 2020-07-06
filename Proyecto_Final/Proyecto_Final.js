@@ -13,15 +13,14 @@ let eye1Y = 0;
 let r_Wrist = new p5.Vector();
 let l_Wrist = new p5.Vector();
 
-let paint; 
-
+let canvas; 
+let pointer; 
 
 
 function setup() {
 
   createCanvas(640, 480);
   video = createCapture(VIDEO);
-
   //video.hide();
 
 
@@ -29,10 +28,10 @@ function setup() {
   poseNet = ml5.poseNet(video, modelReady);
   poseNet.on('pose', gotPoses);
 
-  paint = createGraphics(640, 480);
-  
+  canvas = createGraphics(640, 480);
+  canvas.background(255, 255, 255);
 
-
+  pointer = loadImage('data/pointer.png');
   rect(0, 0, 100, 100);
 }
 
@@ -73,40 +72,27 @@ function gotPoses(poses) {
 
 
 function draw() {
-  paint.background(255, 255, 255);
+  
   translate(video.width, 0);
   scale(-1, 1);
-  
-  //image(video, 0, 0, video.width, video.height);
-  
-  image(paint, 0, 0); 
 
+  //image(video, 0, 0, video.width, video.height);
 
 
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
-  noStroke();
+  canvas.noStroke();
 
 
-  if ((l_Wrist.x > 0) && (l_Wrist.x < 100) && (l_Wrist.y > 0) && ((l_Wrist.y < 100))) {
-    fill(255);
-    paint.ellipse(r_Wrist.x, r_Wrist.y, d);
+  if (l_Wrist.y < 200 ) {
+    canvas.fill(255);
+    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   } else {   
-    fill(255, 0, 0);
-    paint.ellipse(r_Wrist.x, r_Wrist.y, d);
+    canvas.fill(255, 0, 0);
+    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   }
+  image(canvas, 0, 0);
 
-  fill(0 ,255 ,0);
-  ellipse(l_Wrist.x, l_Wrist.y, d);
-
-
-
-  /*if (click(0, 0, 100, 100, l_Wrist.x, l_Wrist.y   ) ) {
-   fill(255, 0, 0);
-   ellipse(r_Wrist.x, r_Wrist.y, d);
-   } else {
-   fill(255);
-   ellipse(r_Wrist.x, r_Wrist.y, d);
-   }*/
+  image(pointer, l_Wrist.x, l_Wrist.y, d, d );
 }
 
 

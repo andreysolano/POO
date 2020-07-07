@@ -13,7 +13,7 @@ class Boton {
 
   show() {
     noStroke();
-    rectMode(CORNER);
+    rectMode(CENTER);
     fill (120,235,0);
     rect(this.x, this.y, this.w, this.h);
   }

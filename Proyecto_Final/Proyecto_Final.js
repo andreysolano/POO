@@ -16,6 +16,7 @@ let l_Wrist = new p5.Vector();
 let canvas; 
 let pointer; 
 
+let col = 0;
 
 function setup() {
 
@@ -33,6 +34,10 @@ function setup() {
 
   pointer = loadImage('data/pointer.png');
   rect(0, 0, 100, 100);
+  
+  
+  boton1 = new Boton(440,180,40,40,0);
+  boton2 = new Boton(440,240,40,40,0);
 }
 
 function modelReady() {
@@ -73,33 +78,51 @@ function gotPoses(poses) {
 
 function draw() {
   
+  
+  
   translate(video.width, 0);
   scale(-1, 1);
 
   //image(video, 0, 0, video.width, video.height);
 
-
+  
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
   canvas.noStroke();
 
-
-  if (l_Wrist.y < 200 ) {
+  /*
+  if (l_Wrist.y < 200 ) {  
     canvas.fill(255);
     canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   } else {   
-    canvas.fill(255, 0, 0);
+    canvas.fill(255, col, 0);
     canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   }
+  */
+  canvas.fill(255, 0, 0);
+  canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
+  
+  
   image(canvas, 0, 0);
 
-  image(pointer, l_Wrist.x, l_Wrist.y, d, d );
+  image(pointer, l_Wrist.x, l_Wrist.y, d, d );  
+  
+  
+  boton1.show();
+  boton2.show();
+  if (l_Wrist.x>= 420 && l_Wrist.x<= 460 && l_Wrist.y <= 200 && l_Wrist.y >= 160){
+    canvas.fill(255,255,0);
+    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
+  }else{
+  if (l_Wrist.x>= 420 && l_Wrist.x<= 460 && l_Wrist.y <= 220 && l_Wrist.y >= 260){
+    canvas.fill(255, 100, 0);
+    canvas.ellipse(r_Wrist.x, r_Wrist.y, d); 
+  }}
+  
 }
 
 
-
-
-
-
+  
+  
 
 
 

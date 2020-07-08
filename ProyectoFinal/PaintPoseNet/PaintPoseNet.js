@@ -22,12 +22,13 @@ let pincelG = 0;
 let pincelB = 0;
 
 function preload(){
-  imgBorr = loadImage('borrador.PNG');
+  imgBorr = loadImage('borrador.png');
+  imgGuar = loadImage('guardar.png');
 }
 
 function setup() {
 
-  createCanvas(640, 480);
+  let c=createCanvas(640, 480);
   video = createCapture(VIDEO);
   //video.hide();
 
@@ -42,10 +43,12 @@ function setup() {
   pointer = loadImage('data/pointer.png');
   rect(0, 0, 100, 100);
   
-  
-  boton1 = new Boton(440,180,40,40,50,100,200);
-  boton2 = new Boton(440,240,40,40,0,255,0);
-  botonImg1 = new BotonImg(440, 300, 40, 40, 255, 255, 255, imgBorr);
+  boton1 = new Boton(570,60,40,40,245,64,64);
+  boton2 = new Boton(570,120,40,40,245,239,49);
+  boton3 = new Boton(570,180,40,40,50,100,200);
+  boton4= new Boton(570,240,40,40,0,255,0);
+  botonImg1 = new BotonImg(570, 300, 40, 40, 255, 255, 255, imgBorr);
+  guardar= new Guarda(570, 360, 40, 40, 255, 255, 255, imgGuar, c);
 }
 
 function modelReady() {
@@ -107,11 +110,17 @@ function draw() {
   
   boton1.show();
   boton2.show();
+  boton3.show();
+  boton4.show();
   boton1.action();
   boton2.action();
+  boton3.action();
+  boton4.action();
   botonImg1.showImg();
   botonImg1.action();
-  
+  guardar.show();
+  guardar.showImg();
+  guardar.saver();
 }
 
 

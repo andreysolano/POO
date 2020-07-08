@@ -43,12 +43,14 @@ function setup() {
   pointer = loadImage('data/pointer.png');
   rect(0, 0, 100, 100);
   
-  boton1 = new Boton(570,60,40,40,245,64,64);
-  boton2 = new Boton(570,120,40,40,245,239,49);
-  boton3 = new Boton(570,180,40,40,50,100,200);
-  boton4= new Boton(570,240,40,40,0,255,0);
-  botonImg1 = new BotonImg(570, 300, 40, 40, 255, 255, 255, imgBorr);
-  guardar= new Guarda(570, 360, 40, 40, 255, 255, 255, imgGuar, c);
+  boton1 = new Boton(570,20,40,40,245,64,64);
+  boton2 = new Boton(510,20,40,40,245,239,49);
+  boton3 = new Boton(450,20,40,40,50,100,200);
+  boton4= new Boton(390,20,40,40,0,255,0);
+  boton5= new Boton(330,20,40,40,113,36,178);
+  boton6= new Boton(270,20,40,40,0,0,0);
+  botonImg1 = new BotonImg(570, 80, 40, 40, 255, 255, 255, imgBorr);
+  guardar= new Guarda(570, 140, 40, 40, 255, 255, 255, imgGuar, c);
 }
 
 function modelReady() {
@@ -98,10 +100,11 @@ function draw() {
 
   
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
-  canvas.noStroke();
-  canvas.fill(pincelR, pincelG, pincelB);        //<-------****
-  canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
-  
+  if (l_Wrist.y >=70){//Cuando se está escogiendo el color no se dibuja
+    canvas.noStroke();
+    canvas.fill(pincelR, pincelG, pincelB);        //<-------****
+    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
+  }
   
   image(canvas, 0, 0);
 
@@ -112,28 +115,17 @@ function draw() {
   boton2.show();
   boton3.show();
   boton4.show();
+  boton5.show();
+  boton6.show();
   boton1.action();
   boton2.action();
   boton3.action();
   boton4.action();
+  boton5.action();
+  boton6.action();
   botonImg1.showImg();
   botonImg1.action();
   guardar.show();
   guardar.showImg();
   guardar.saver();
-}
-
-
-  
-  
-
-
-
-function click( x, y, w, h, px, py) {
-
-  if (px >= x && px <= x + w && py >= y && py <= y + h) {  
-    return true;
-  } else {
-    return false;
-  }
 }

@@ -15,5 +15,5 @@
 	
  - [ ] **[Robot](https://andreysolano.github.io/Pages-Proyecto-Final/Robot/)**
        	
- - [ ] **[Paint](https://github.com/andreysolano/POO)**
+ - [ ] **[Paint](https://andreysolano.github.io/Pages-Proyecto-Final/PaintPoseNet/)**
 

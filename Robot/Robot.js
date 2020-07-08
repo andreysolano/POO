@@ -44,10 +44,10 @@ function modelReady() {
   console.log('model ready');
 }
 
+// Detecta los puntos claves de PoseNet 
 function gotPoses(poses) {
 
   if (poses.length > 0) {
-
     let wX = poses[0].pose.keypoints[10].position.x;
     let wY = poses[0].pose.keypoints[10].position.y;
     let lwX = poses[0].pose.keypoints[9].position.x;
@@ -72,24 +72,26 @@ function gotPoses(poses) {
 
 
 function draw() {
-
+  
+  // Luces que le dan el aspecto al speculaMetrial. 
   background(42);
   directionalLight(103, 103, 103, 0, 0, 1);
   directionalLight(62, 56, 0, -1, 0, 0);
   ambientLight(113, 113, 113);
   noStroke();
-
+  // Distancia entre los ojos para el zoom 
   let zoom = dist(l_Eye.x, l_Eye.y, r_Eye.x, r_Eye.y);
 
+  // Mapeo de los valores para hacerlos mas precisos
   let x2 = map(r_Wrist.x, 0, width, 0, 10, true);
   let y2 = map(r_Wrist.y, 0, height, 7, 18, true);
   let x3 = map(l_Wrist.x, 0, width, 15, 25, true);
   let x4 = map( zoom, 15, 100, -250, 500, true );
   let prueba = map( mouseX, 0, width, -1000, 1000, true);
   
-  //print(zoom);
   translate(0, 0, x4);
   rotateY(x3);
+  
   push();
   translate(0, 175);
   fill(12, 191, 10);
@@ -98,10 +100,10 @@ function draw() {
   pop();
 
 
-
   rotate(PI);
   scale(3);
-
+  
+  //Base Fija 
   push();
   translate(0, -33, 0);
   specularMaterial(250, 0, 0);
@@ -109,8 +111,7 @@ function draw() {
   model(end);
   pop();
 
-
-
+  // Base movible 
   fill('#FFE308');
   translate(0, -30, 0);
   push();
@@ -119,25 +120,34 @@ function draw() {
   rotateY(x2);
   model(base);
 
+  //Brazo 
   translate(0, 25, 0);
   rotateX(y2);
-
   specularMaterial(250, 255, 0);
   fill('#FFF700');
   model(shoulder);
 
+  //Antebrazo 
   translate(0, 0, 50);
   rotateX(degrees(30));
-
   rotateX(y2);
   specularMaterial(250, 255, 0);
   fill('#FFF700');
   model(upArm);
 
+  //Mano 
   translate(0, 0, -50);
   rotateX(degrees(130));
   specularMaterial(250, 0, 0);
   fill('#AAAAAA');
   model(loArm);
   pop();
+  
+  //Caja 
+  push();
+  translate(0,-20,40);
+  normalMaterial();
+  box(25);
+  pop();
+  
 }

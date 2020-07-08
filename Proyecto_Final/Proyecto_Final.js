@@ -6,6 +6,7 @@
 let video;
 let poseNet;
 let nose = new p5.Vector();
+let imgBorr;
 
 let eye1X = 0;
 let eye1Y = 0; 
@@ -16,7 +17,13 @@ let l_Wrist = new p5.Vector();
 let canvas; 
 let pointer; 
 
-let col = 0;
+let pincelR = 0;
+let pincelG = 0;
+let pincelB = 0;
+
+function preload(){
+  imgBorr = loadImage('borrador.PNG');
+}
 
 function setup() {
 
@@ -36,8 +43,9 @@ function setup() {
   rect(0, 0, 100, 100);
   
   
-  boton1 = new Boton(440,180,40,40,0);
-  boton2 = new Boton(440,240,40,40,0);
+  boton1 = new Boton(440,180,40,40,50,100,200);
+  boton2 = new Boton(440,240,40,40,0,255,0);
+  botonImg1 = new BotonImg(440, 300, 40, 40, 255, 255, 255, imgBorr);
 }
 
 function modelReady() {
@@ -88,17 +96,7 @@ function draw() {
   
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
   canvas.noStroke();
-
-  /*
-  if (l_Wrist.y < 200 ) {  
-    canvas.fill(255);
-    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
-  } else {   
-    canvas.fill(255, col, 0);
-    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
-  }
-  */
-  canvas.fill(255, 0, 0);
+  canvas.fill(pincelR, pincelG, pincelB);        //<-------****
   canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   
   
@@ -109,14 +107,10 @@ function draw() {
   
   boton1.show();
   boton2.show();
-  if (l_Wrist.x>= 420 && l_Wrist.x<= 460 && l_Wrist.y <= 200 && l_Wrist.y >= 160){
-    canvas.fill(255,255,0);
-    canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
-  }else{
-  if (l_Wrist.x>= 420 && l_Wrist.x<= 460 && l_Wrist.y <= 220 && l_Wrist.y >= 260){
-    canvas.fill(255, 100, 0);
-    canvas.ellipse(r_Wrist.x, r_Wrist.y, d); 
-  }}
+  boton1.action();
+  boton2.action();
+  botonImg1.showImg();
+  botonImg1.action();
   
 }
 

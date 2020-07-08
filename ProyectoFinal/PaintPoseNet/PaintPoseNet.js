@@ -81,10 +81,13 @@ function setup() {
   botonFiltro0 = new BotonFiltro(450,60,40,40,245,64,64);
   botonFiltro1 = new BotonFiltro(450,120,40,40,245,239,49);
   botonFiltro2 = new BotonFiltro(450,180,40,40,50,100,200);
+<<<<<<< HEAD
 >>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
 =======
   guardar= new Guarda(570, 140, 40, 40, 255, 255, 255, imgGuar, c);
 >>>>>>> parent of 850dfac... Reset - imagenes
+=======
+>>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
 }
 
 function modelReady() {
@@ -135,11 +138,14 @@ function draw() {
   
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
 <<<<<<< HEAD
+<<<<<<< HEAD
   if (l_Wrist.y >=70){//Cuando se está escogiendo el color no se dibuja
     canvas.noStroke();
     canvas.fill(pincelR, pincelG, pincelB);        //<-------****
     canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   }
+=======
+>>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
 =======
 >>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
   
@@ -197,10 +203,13 @@ function draw() {
   guardar.saver();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   reset.show();
   reset.showImg(); 
   reset.limpia();
 =======
+=======
+>>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
   botonCanvas0.showN();
   botonCanvas1.showN();
   botonCanvas2.showN();

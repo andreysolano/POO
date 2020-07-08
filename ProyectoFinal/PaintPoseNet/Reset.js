@@ -14,7 +14,8 @@ class Reset extends Boton{
   
   limpia(){
     if (l_Wrist.x>= this.x && l_Wrist.x<= (this.x + this.w) && l_Wrist.y <= (this.y + this.h) && l_Wrist.y >= this.y){
-      this.c.clear();
+      canvas.clear();
+
         
     }
   }

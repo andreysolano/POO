@@ -11,4 +11,7 @@ class BotonImg extends Boton{
     rect(this.x + 3, this.y + 3, this.w + 3, this.h + 3);
     image(this.img, this.x, this.y, this.w, this.h);
   }
+  
+  
+  
 }

@@ -56,7 +56,6 @@ function setup() {
   pointer = loadImage('data/pointer.png');
   rect(0, 0, 100, 100);
   
-<<<<<<< HEAD
   boton1 = new Boton(460,20,40,40,245,64,64);
   boton2 = new Boton(400,20,40,40,245,239,49);
   boton3 = new Boton(340,20,40,40,50,100,200);
@@ -64,31 +63,10 @@ function setup() {
   boton5= new Boton(220,20,40,40,113,36,178);
   boton6= new Boton(160,20,40,40,0,0,0);
   botonImg1 = new BotonImg(570, 80, 40, 40, 255, 255, 255, imgBorr);
-<<<<<<< HEAD
+
   guardar = new Guarda(570, 140, 40, 40, 255, 255, 255, imgGuar, c);
   reset = new Reset(570, 200, 40, 40, 255, 240, 240, imgX, c);  
-=======
-  boton1 = new Boton(570,60,40,40,245,64,64);
-  boton2 = new Boton(570,120,40,40,245,239,49);
-  boton3 = new Boton(570,180,40,40,50,100,200);
-  boton4= new Boton(570,240,40,40,0,255,0);
-  botonImg1 = new BotonImg(570, 300, 40, 40, 255, 255, 255, imgBorr);
-  guardar= new Guarda(570, 360, 40, 40, 255, 255, 255, imgGuar, c);
-  botonCanvas0 = new BotonCanvas(500,60,40,40,245,64,64,0);
-  botonCanvas1 = new BotonCanvas(500,120,40,40,245,239,49,1);
-  botonCanvas2 = new BotonCanvas(500,180,40,40,50,100,200,2);
-  botonCanvas3 = new BotonCanvas(500,240,40,40,0,255,0,3);
-  botonFiltro0 = new BotonFiltro(450,60,40,40,245,64,64);
-  botonFiltro1 = new BotonFiltro(450,120,40,40,245,239,49);
-  botonFiltro2 = new BotonFiltro(450,180,40,40,50,100,200);
-<<<<<<< HEAD
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
-=======
-  guardar= new Guarda(570, 140, 40, 40, 255, 255, 255, imgGuar, c);
->>>>>>> parent of 850dfac... Reset - imagenes
-=======
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
-}
+
 
 function modelReady() {
   console.log('model ready');
@@ -137,18 +115,13 @@ function draw() {
 
   
   let d = dist(nose.x, nose.y, eye1X, eye1Y);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   if (l_Wrist.y >=70){//Cuando se está escogiendo el color no se dibuja
     canvas.noStroke();
     canvas.fill(pincelR, pincelG, pincelB);        //<-------****
     canvas.ellipse(r_Wrist.x, r_Wrist.y, d);
   }
-=======
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
-=======
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
-  
+
 
   ////**** condicionales para las capas ****////
   if(canvasUsed == 0){
@@ -201,15 +174,11 @@ function draw() {
   guardar.show();
   guardar.showImg();
   guardar.saver();
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   reset.show();
   reset.showImg(); 
   reset.limpia();
-=======
-=======
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
+
   botonCanvas0.showN();
   botonCanvas1.showN();
   botonCanvas2.showN();
@@ -228,8 +197,4 @@ function draw() {
 
 
   
->>>>>>> fc395ce21b645c143ab510fb367a18620a1e8af2
-  
-=======
->>>>>>> parent of 850dfac... Reset - imagenes
 }
